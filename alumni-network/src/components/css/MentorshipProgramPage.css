@@ -1,0 +1,27 @@
+/* MentorshipProgramPage.css */
+
+.mentorship-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mentorship-entry {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .mentorship-entry h3 {
+    color: #333;
+  }
+  
+  .mentorship-entry p {
+    margin-top: 5px;
+    color: #555;
+  }
+  

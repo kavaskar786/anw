@@ -1,0 +1,43 @@
+// App.js
+
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navigation from './navigation/Navigation';
+import HomePage from './components/HomePage';
+import LoginPage from './components/LoginPage';
+import RegistrationPage from './components/RegistrationPage';
+import ProfilePage from './components/ProfilePage';
+import DirectoryPage from './components/DirectoryPage';
+import EventsPage from './components/EventsPage';
+import NewsPage from './components/NewsPage';
+import JobBoardPage from './components/JobBoardPage';
+import DiscussionForumPage from './components/DiscussionForumPage';
+import MentorshipProgramPage from './components/MentorshipProgramPage';
+import SettingsPage from './components/SettingsPage';
+import ContactUsPage from './components/ContactUsPage';
+const App = () => {
+  return (
+    <Router>
+      <div>
+        <Navigation />
+
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/registration" element={<RegistrationPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/directory" element={<DirectoryPage />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/jobboard" element={<JobBoardPage />} />
+          <Route path="/discussion" element={<DiscussionForumPage />} />
+          <Route path="/mentorship" element={<MentorshipProgramPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/contact" element={<ContactUsPage />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+};
+
+export default App;

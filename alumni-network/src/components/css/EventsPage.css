@@ -1,0 +1,27 @@
+/* EventsPage.css */
+
+.events-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .event-entry {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .event-entry h3 {
+    color: #333;
+  }
+  
+  .event-entry p {
+    margin-top: 5px;
+    color: #555;
+  }
+  

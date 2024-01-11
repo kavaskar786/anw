@@ -1,0 +1,29 @@
+/* ProfilePage.css */
+
+.profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-container h2 {
+    color: #333;
+  }
+  
+  .profile-details {
+    margin-top: 20px;
+  }
+  
+  .profile-details div {
+    margin-bottom: 10px;
+  }
+  
+  .profile-details strong {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+  
