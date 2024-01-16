@@ -1,26 +1,40 @@
 // EventsPage.js
 
-import React from 'react';
-import './css/EventsPage.css'; // Import the CSS file for styling
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
+import './css/EventsPage.css';
 
 const EventsPage = () => {
-  const eventsData = [
-    { id: 1, title: 'Networking Mixer', date: '2024-05-15', location: 'Virtual Event' },
-    { id: 2, title: 'Career Workshop', date: '2024-06-10', location: 'Conference Room A' },
-    // Add more events as needed
-  ];
+  const [eventsData, setEventsData] = useState([]);
+
+  const handleAddEvent = (newEventData) => {
+    setEventsData((prevEvents) => [...prevEvents, newEventData]);
+  };
 
   return (
-    <div className="events-container">
-      <h2>Events Page</h2>
-      {eventsData.map((event) => (
-        <div key={event.id} className="event-entry">
-          <h3>{event.title}</h3>
-          <p>Date: {event.date}</p>
-          <p>Location: {event.location}</p>
-          {/* Add more event details as needed */}
+    <div >
+      <div className="events-page-container">
+        <h1>Upcoming Events</h1>
+        <div className="events-list">
+          {eventsData.map((event, index) => (
+            <div key={index} className="event-item">
+              <h2>{event.title}</h2>
+              <p>Date: {event.date}</p>
+              <p>Time: {event.time}</p>
+              <p>Location: {event.location}</p>
+              <p>{event.description}</p>
+              <a href={event.registrationLink} target="_blank" rel="noopener noreferrer">
+                RSVP or Register
+              </a>
+            </div>
+          ))}
         </div>
-      ))}
+        <Link to="/events/new" className="add-event-link">
+          Add New Event
+        </Link>
+      </div>
+      <Footer />
     </div>
   );
 };

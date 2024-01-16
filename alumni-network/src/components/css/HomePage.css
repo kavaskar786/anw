@@ -17,9 +17,44 @@
   margin-bottom: 50px;
 }
 
+.carousel-section {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.carousel-section h2 {
+  margin-bottom: 10px;
+}
+
+.slick-dots {
+  bottom: -30px;
+}
+
+.slick-prev,
+.slick-next {
+  font-size: 24px;
+  color: #007bff;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-section:hover .slick-prev,
+.carousel-section:hover .slick-next {
+  opacity: 1;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  color: #0056b3;
+}
 footer {
   background-color: #333;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   color: white;
   bottom: 0;

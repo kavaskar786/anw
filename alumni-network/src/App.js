@@ -15,6 +15,7 @@ import DiscussionForumPage from './components/DiscussionForumPage';
 import MentorshipProgramPage from './components/MentorshipProgramPage';
 import SettingsPage from './components/SettingsPage';
 import ContactUsPage from './components/ContactUsPage';
+import NewEventFormPage from './components/NewEventFormPage';
 const App = () => {
   return (
     <Router>
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/directory" element={<DirectoryPage />} />
           <Route path="/events" element={<EventsPage />} />
+          <Route path="/events/new" element={<NewEventFormPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/jobboard" element={<JobBoardPage />} />
           <Route path="/discussion" element={<DiscussionForumPage />} />
