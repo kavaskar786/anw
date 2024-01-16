@@ -6,11 +6,12 @@ import Footer from '../components/Footer';
 import './css/EventsPage.css';
 
 const EventsPage = () => {
-  const [eventsData, setEventsData] = useState([]);
 
+  const [eventsData] = useState([]);//setEventdata is removed from here if needed for future pls include it
+/*
   const handleAddEvent = (newEventData) => {
     setEventsData((prevEvents) => [...prevEvents, newEventData]);
-  };
+  };*/
 
   return (
     <div >
