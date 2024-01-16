@@ -1,25 +1,51 @@
 // DirectoryPage.js
 
-import React from 'react';
-import './css/DirectoryPage.css'; // Import the CSS file for styling
+import React, { useState } from 'react';
+import AlumniService from './AlumniProfileCard'; 
+import './css/DirectoryPage.css';
 
 const DirectoryPage = () => {
-  const directoryData = [
-    { id: 1, name: 'John Doe', email: 'john.doe@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com' },
-    // Add more directory entries as needed
-  ];
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = async () => {
+    try {
+      const alumniData = await AlumniService.searchAlumni(searchTerm);
+      setSearchResults(alumniData);
+    } catch (error) {
+      console.error('Error fetching alumni data:', error.message);
+    }
+  };
 
   return (
-    <div className="directory-container">
-      <h2>Directory Page</h2>
-      {directoryData.map((entry) => (
-        <div key={entry.id} className="directory-entry">
-          <strong>{entry.name}</strong>
-          <p>Email: {entry.email}</p>
-          {/* Add more directory details as needed */}
-        </div>
-      ))}
+    <div className="Directcont">
+    <div>
+    <center>  <h2 className="directory-heading">Alumni Directory</h2></center>
+      <div className="directory-search-bar">
+        <input
+          type="text"
+          placeholder="Search by name, graduation year, location..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="directory-search-input"
+        />
+        <button onClick={handleSearch} className="directory-search-button">Search</button>
+      </div>
+
+      {searchResults.length > 0 ? (
+        <ul className="directory-results-list">
+          {searchResults.map((alumni) => (
+            <li key={alumni.id} className="directory-results-item">
+              <p>{alumni.name}</p>
+              <p>{alumni.graduationYear}</p>
+              <p>{alumni.location}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+       <center> <p className="directory-no-results">No results found.</p></center>
+      )}
+    </div>
     </div>
   );
 };

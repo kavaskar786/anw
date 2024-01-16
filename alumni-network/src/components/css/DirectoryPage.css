@@ -1,27 +1,78 @@
 /* DirectoryPage.css */
 
+.Directcont {
+  background-color: #f8f8f8; /* Light background color */
+  padding: 20px;
+  min-height: 100vh; /* Ensure the container takes at least the full height of the viewport */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center;
+  background-image: url('../images/abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner (1).jpg'); /* Replace 'your-background-image.jpg' with your image path */
+  background-size: cover;
+  background-position: center;
+}
+
 .directory-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .directory-entry {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-  }
-  
-  .directory-entry strong {
-    color: #333;
-  }
-  
-  .directory-entry p {
-    margin-top: 5px;
-    color: #555;
-  }
-  
+  max-width: 800px; /* Adjust the maximum width of the content */
+  text-align: center;
+  width: 100%; /* Make it responsive */
+}
+
+.directory-heading {
+  color: #333; /* Dark text color */
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.directory-search-bar {
+  margin-bottom: 20px;
+  width: 100%; /* Make it responsive */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.directory-search-input {
+  flex: 3; /* Take 3/4 of the space */
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc; /* Light border color */
+  border-radius: 5px;
+}
+
+.directory-search-button {
+  flex: 1; /* Take 1/4 of the space */
+  margin-left: 10px; /* Add some space between the input and button */
+  padding: 13px 25px; /* Increase padding for a larger button */
+  font-size: 1em;
+  background-color: #3498db; /* Blue button color */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.directory-search-button:hover {
+  background-color: #217dbb; /* Darker blue color on hover */
+}
+
+.directory-results-list {
+  list-style: none;
+  padding: 0;
+  width: 100%; /* Make it responsive */
+}
+
+.directory-results-item {
+  background-color: #fff; /* White background color for each result item */
+  border: 1px solid #ddd; /* Light border color */
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.directory-no-results {
+  color: white; /* Gray text color */
+  font-style: italic;
+  width: 100%; /* Make it responsive */
+}
