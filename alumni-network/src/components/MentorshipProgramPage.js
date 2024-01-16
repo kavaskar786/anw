@@ -1,27 +1,54 @@
 // MentorshipProgramPage.js
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './css/MentorshipProgramPage.css';
 
 const MentorshipProgramPage = () => {
-  // Placeholder mentorship program data (replace with actual data)
-  const mentorshipData = [
-    { id: 1, mentor: 'John Doe', expertise: 'Software Development', availability: 'Available' },
-    { id: 2, mentor: 'Jane Smith', expertise: 'Marketing Strategy', availability: 'Limited' },
-    // Add more mentorship program entries as needed
-  ];
+  const [mentors, setMentors] = useState([]);
+
+  // Simulate fetching data from an API
+  useEffect(() => {
+    // Replace this with your actual data fetching logic
+    const fetchData = async () => {
+      // Simulating API call or data retrieval
+      const response = await fetch('your_mentors_api_endpoint');
+      const data = await response.json();
+
+      setMentors(data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <div>
-      <h2>Mentorship Program Page</h2>
-      {mentorshipData.map((entry) => (
-        <div key={entry.id} className="mentorship-entry">
-          <h3>{entry.mentor}</h3>
-          <p>Expertise: {entry.expertise}</p>
-          <p>Availability: {entry.availability}</p>
-          {/* Add more mentorship program details as needed */}
-        </div>
-      ))}
+    <div className="mentCont">
+    <div className="mentorship-container">
+      <h2 className="mentorship-header">Mentorship Program</h2>
+
+      {/* Search and Filter Section */}
+      <div className="search-filter-section">
+        <input type="text" placeholder="Search mentors" className="search-input" />
+        <select className="filter-dropdown">
+          <option value="">Filter by Industry</option>
+          <option value="technology">Technology</option>
+          {/* Add more industry options */}
+        </select>
+        <button className="filter-btn">Apply Filters</button>
+      </div>
+
+      {/* Mentor List Section */}
+      <div className="mentor-list">
+        {mentors.map((mentor) => (
+          <div key={mentor.id} className="mentor-card">
+            <img src={mentor.avatar} alt={`${mentor.name}'s Avatar`} className="mentor-avatar" />
+            <h3 className="mentor-name">{mentor.name}</h3>
+            <p className="mentor-title">{mentor.title}</p>
+            <p className="mentor-industry">{mentor.industry}</p>
+            <button className="connect-btn">Connect</button>
+          </div>
+        ))}
+      </div>
+    </div>
     </div>
   );
 };

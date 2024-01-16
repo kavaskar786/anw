@@ -1,27 +1,120 @@
 /* MentorshipProgramPage.css */
 
+/* MentorshipProgramPage.css */
+
 .mentorship-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .mentorship-entry {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-  }
-  
-  .mentorship-entry h3 {
-    color: #333;
-  }
-  
-  .mentorship-entry p {
-    margin-top: 5px;
-    color: #555;
-  }
-  
+  max-width: 1000px; /* Increase max-width as needed */
+  margin: 0 auto;
+  padding: 20px;
+  /*background-image: url('../images/plain-smooth-green-wall-texture.jpg');*/
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  position: relative;
+}
+.mentCont{
+  background-image: url('../images/plain-smooth-green-wall-texture.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+.mentorship-header {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #fff; /* Set text color to contrast with the background */
+  text-align: center;
+}
+
+.search-filter-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.filter-dropdown {
+  padding: 12px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.filter-btn {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+.filter-btn:hover {
+  background-color: #0056b3;
+}
+
+.mentor-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.mentor-card {
+  width: 250px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.mentor-card:hover {
+  transform: scale(1.05);
+}
+
+.mentor-avatar {
+  width: 100%;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.mentor-name {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.mentor-title,
+.mentor-industry {
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.connect-btn {
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+.connect-btn:hover {
+  background-color: #0056b3;
+}
