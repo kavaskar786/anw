@@ -1,73 +1,125 @@
-/* LoginPage.css */
-
+/* Overall Page Styles */
 .login-page-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f4f4f4; /* Set a background color for the page */
+   background-image: url('../images/pexels-steve-johnson-1509534.jpg'); /*Add your background image path */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Login Container Styles */
+.login-container {
+  max-width: 400px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  margin: 20px; /* Add margin for better spacing */
+  box-sizing: border-box; /* Ensure padding and border don't exceed max-width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header Styles */
+.login-container h2 {
+  color: #333;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Form Styles */
+.login-container form {
+  width: 100%;
+}
+
+/* Input Styles */
+.login-container label {
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.login-container input {
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s ease-in-out;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.login-container input:focus {
+  border-color: #007bff;
+  outline: none; /* Remove the outline on focus for better aesthetics */
+}
+
+/* Button Styles */
+.login-container button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  width: 100%;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Checkbox Styles */
+.login-container .remember-me-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 115px;
+  width: 100%;
+}
+
+
+/* Error Message Styles */
+.error-message {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  width: 100%;
+}
+
+/* Additional Link Styles */
+.login-container p {
+  text-align: center;
+  margin-top: 15px;
+  color: #555;
+}
+
+.login-container p a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.login-container p a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+/* Custom Fonts */
+body {
+  font-family: 'YourFont', sans-serif; /* Replace 'YourFont' with the desired font */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
   .login-container {
-    max-width: 400px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
   }
-  
-  .login-container h2 {
-    color: #333;
-    text-align: center;
-  }
-  
-  .login-container form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .login-container label {
-    margin-bottom: 5px;
-    color: #555;
-  }
-  
-  .login-container input {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .login-container button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .login-container button:hover {
-    background-color: #0056b3;
-  }
-  
-  .login-container p {
-    text-align: center;
-    margin-top: 15px;
-    color: #555;
-  }
-  
-  .login-container p a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .login-container p a:hover {
-    text-decoration: underline;
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 10px;
-    text-align: center;
-  }
-  
+}

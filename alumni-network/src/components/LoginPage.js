@@ -8,68 +8,92 @@ const LoginPage = () => {
   const [loginData, setLoginData] = useState({
     usernameOrEmail: '',
     password: '',
+    rememberMe: false,
   });
 
-  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+
     setLoginData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
-  const handleLogin = () => {
-    const { usernameOrEmail, password } = loginData;
+  const handleLogin = async () => {
+    const { usernameOrEmail, password, rememberMe } = loginData;
 
-    // Simple validation example
     if (!usernameOrEmail.trim() || !password.trim()) {
-      setError('Please enter both username or email and password.');
+      // Display a popup alert for the validation error
+      alert('Please enter both username or email and password.');
       return;
     }
 
-    // Additional validation logic (e.g., email format validation)
+    try {
+      setLoading(true);
+      // Simulate API call for authentication (replace with actual authentication logic)
+      const isAuthenticated = false; // Replace with actual authentication logic
 
-    // If validation passes, proceed with login
-    console.log('Login data:', loginData);
+      if (isAuthenticated) {
+        if (rememberMe) {
+          localStorage.setItem('userData', JSON.stringify({ usernameOrEmail }));
+        }
+        console.log('User authenticated!');
+      } else {
+        // Display a popup alert for authentication error
+        alert('Invalid username/email or password. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error during authentication:', error);
+      // Display a popup alert for general error
+      alert('An error occurred during authentication. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    // Clear the error state
-    setError('');
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
   };
 
   return (
     <div className="login-page-container">
-    <div className="login-container">
-      <h2>Login Page</h2>
-      <form>
-        <div>
-          <label htmlFor="usernameOrEmail">Username or Email:</label>
-          <input
-            type="text"
-            id="usernameOrEmail"
-            name="usernameOrEmail"
-            value={loginData.usernameOrEmail}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={loginData.password}
-            onChange={handleChange}
-          />
-        </div>
-        {error && <p className="error-message">{error}</p>}
-        <button type="button" onClick={handleLogin}>Login</button>
-      </form>
-      <p>
-        New user? <Link to="/registration">Register here</Link>.
-      </p>
-    </div>
+      <div className="login-container">
+        <h2>Login Page</h2>
+        <form>
+          <div>
+            <label htmlFor="usernameOrEmail">Username or Email:</label>
+            <input
+              type="text"
+              id="usernameOrEmail"
+              name="usernameOrEmail"
+              value={loginData.usernameOrEmail}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={loginData.password}
+              onChange={handleChange}
+              onKeyPress={handleKeyPress}
+            />
+          </div>
+          <button type="button" onClick={handleLogin} disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
+        </form>
+        <p>
+          New user? <Link to="/registration">Register here</Link>.
+        </p>
+      </div>
     </div>
   );
 };
