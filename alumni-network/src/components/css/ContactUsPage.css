@@ -1,22 +1,50 @@
-/*cvontanct page Css*/
+/* ContactUsPage.css */
+/* ContactUsPage.css */
+
+/* ContactUsPage.css */
+
+.background-container {
+  margin: 0;
+  padding: 0;
+  background-image: url('../images/abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Your Preferred Font', sans-serif;
+  overflow: hidden; /* Add overflow to hide any potential content overflow */
+}
+
+.root-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
 .contact-container {
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  border-radius: 8px;
+  margin: 20px auto;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background-color: rgba(248, 248, 248, 0.5); /* Adjust the alpha value for transparency */
+  border-radius: 10px;
+  position: relative; /* Add position relative to ensure child elements are positioned relative to this container */
 }
+
+/* Rest of your existing styles */
 
 .contact-header {
-  font-size: 28px;
+  font-size: 32px;
   margin-bottom: 30px;
-  color: #333;
+  color: #444;
 }
 
+/* ... (other styles) */
+
+
 .contact-details {
-  margin-bottom: 20px;
-  color: #555;
+  margin-bottom: 25px;
+  color: #666;
 }
 
 .contact-form {
@@ -24,68 +52,60 @@
   flex-direction: column;
 }
 
+.form-group {
+  margin-bottom: 20px;
+}
+
 .contact-form label {
   margin-bottom: 10px;
-  color: #333;
+  color: #555;
 }
 
 .contact-form input,
 .contact-form textarea {
-  padding: 12px;
+  padding: 14px;
   margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   transition: border-color 0.3s ease;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  border-color: #007bff;
+  border-color: #3498db;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #999;
 }
 
 .contact-form button {
-  padding: 12px 20px;
-  background-color: #007bff;
+  padding: 14px;
+  background-color: #3498db;
   color: #fff;
   cursor: pointer;
   border: none;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Ensure the button takes full width within the container */
 }
 
 .contact-form button:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
+  background-color: #217dbb;
 }
 
 .success-message {
-  background-color: #dff0d8;
-  border: 1px solid #d6e9c6;
-  color: #3c763d;
-  padding: 15px;
+  background-color: #eaf7ea;
+  border: 1px solid #c2e5c2;
+  color: #4cae4c;
+  padding: 20px;
   margin-top: 30px;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
-@media screen and (max-width: 600px) {
-  .contact-container {
-    max-width: 600px;
-    padding: 15px;
-  }
-
-  .contact-header {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-
-  .contact-form input,
-  .contact-form textarea {
-    padding: 10px;
-    margin-bottom: 15px;
-  }
-
-  .contact-form button {
-    padding: 10px 16px;
-    font-size: 16px;
-  }
+/* Enhancements based on .js classNames */
+.contact-container .contact-form button {
+  margin-top: 10px; /* Adjust spacing between the form elements and the button */
 }

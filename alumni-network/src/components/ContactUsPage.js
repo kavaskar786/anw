@@ -10,7 +10,6 @@ const ContactUsPage = () => {
     message: '',
     graduationYear: '',
     major: '',
-    // Add more fields as needed
   });
 
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -32,14 +31,14 @@ const ContactUsPage = () => {
   };
 
   return (
+    <div className="background-container ">
     <div className="contact-container">
-      <h2 className="contact-header">Contact Us</h2>
+     <center><h2 className="contact-header">Contact Us</h2></center>
       <p className="contact-details">
         If you have any questions, feedback, or need assistance, please reach out to us. Alumni are always
         welcome to connect!
       </p>
 
-     
       <p className="contact-details">
         You can also use the form below to contact us:
       </p>
@@ -50,57 +49,68 @@ const ContactUsPage = () => {
         </div>
       ) : (
         <form className="contact-form" onSubmit={handleSubmit}>
-          <label htmlFor="name">Your Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <div className="form-group">
+            <label htmlFor="name">Your Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label htmlFor="email">Your Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+          <div className="form-group">
+            <label htmlFor="email">Your Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label htmlFor="graduationYear">Graduation Year:</label>
-          <input
-            type="text"
-            id="graduationYear"
-            name="graduationYear"
-            value={formData.graduationYear}
-            onChange={handleChange}
-          />
+          <div className="form-group">
+            <label htmlFor="graduationYear">Graduation Year:</label>
+            <input
+              type="text"
+              id="graduationYear"
+              name="graduationYear"
+              value={formData.graduationYear}
+              onChange={handleChange}
+            />
+          </div>
 
-          <label htmlFor="major">Major:</label>
-          <input
-            type="text"
-            id="major"
-            name="major"
-            value={formData.major}
-            onChange={handleChange}
-          />
+          <div className="form-group">
+            <label htmlFor="major">Major:</label>
+            <input
+              type="text"
+              id="major"
+              name="major"
+              value={formData.major}
+              onChange={handleChange}
+            />
+          </div>
 
-          <label htmlFor="message">Your Message:</label>
-          <textarea
-            id="message"
-            name="message"
-            rows="4"
-            value={formData.message}
-            onChange={handleChange}
-            required
-          ></textarea>
+          <div className="form-group">
+            <label htmlFor="message">Your Message:</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              value={formData.message}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
 
           <button type="submit">Submit</button>
         </form>
       )}
+    </div>
     </div>
   );
 };
