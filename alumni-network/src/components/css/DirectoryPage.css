@@ -36,19 +36,23 @@
   flex: 3; /* Take 3/4 of the space */
   padding: 10px;
   font-size: 1em;
+  width:40em;
   border: 1px solid #ccc; /* Light border color */
   border-radius: 5px;
 }
 
 .directory-search-button {
-  flex: 1; /* Take 1/4 of the space */
-  margin-left: 10px; /* Add some space between the input and button */
-  padding: 13px 25px; /* Increase padding for a larger button */
+  flex: 1; 
+  /* Take 1/4 of the space */
+  margin-left: 10px; 
+  margin-bottom: .69em;
+  /* Add some space between the input and button */
+  /* padding: 13px 25px; Increase padding for a larger button */
   font-size: 1em;
   background-color: #3498db; /* Blue button color */
   color: #fff; /* White text color */
   border: none;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
