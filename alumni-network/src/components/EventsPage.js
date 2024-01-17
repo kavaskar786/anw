@@ -3,18 +3,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+//import NewEventFormPage from './NewEventFormPage';
 import './css/EventsPage.css';
 
 const EventsPage = () => {
+  const [eventsData] = useState([]);
 
-  const [eventsData] = useState([]);//setEventdata is removed from here if needed for future pls include it
-/*
-  const handleAddEvent = (newEventData) => {
-    setEventsData((prevEvents) => [...prevEvents, newEventData]);
-  };*/
+
+  // const handleAddEvent = (newEventData) => {
+  //   setEventsData((prevEvents) => [...prevEvents, newEventData]);
+  // };
 
   return (
-    <div >
+    <div>
       <div className="events-page-container">
         <h1>Upcoming Events</h1>
         <div className="events-list">
