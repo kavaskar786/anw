@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import './css/ProfilePage.css'; // Import the CSS file for styling
+import Footer from '../components/Footer';
 
 const ProfilePage = () => {
   const [user, setUser] = useState({
@@ -51,6 +52,7 @@ const ProfilePage = () => {
   }, []); // Empty dependency array to run the effect only once when the component mounts
 
   return (
+    <div className='prof_cont'>
     <div className="profile-container">
       <div className="profile-header">
         <img src={user.profilePicture} alt="Profile" />
@@ -102,6 +104,8 @@ const ProfilePage = () => {
           </ul>
         </section>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 };
