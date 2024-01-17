@@ -1,29 +1,116 @@
 /* ProfilePage.css */
 
+/* Base styles */
 .profile-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+ /* background-image: url(''); 
+  background-size: cover; 
+  background-position: center; */
+}
+
+.profile-header {
+  text-align: center;
+}
+
+.profile-header img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease; /* Add smooth transition effect */
+}
+
+.profile-header img:hover {
+  transform: scale(1.1); /* Zoom in on hover */
+}
+
+.profile-header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 24px;
+}
+
+.profile-header p {
+  margin-top: 5px;
+  color: #666;
+}
+
+.profile-navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.profile-navigation a {
+  color: #555;
+  text-decoration: none;
+  padding: 10px;
+  margin: 0 10px;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+.profile-navigation a:hover {
+  border-bottom: 2px solid #333;
+}
+
+.profile-content {
+  margin-top: 20px;
+}
+
+.about-section,
+.experience-section,
+.education-section,
+.skills-section {
+  margin-bottom: 30px;
+}
+
+.about-section p {
+  line-height: 1.5;
+  color: #444;
+}
+
+h2 {
+  color: #333;
+  font-size: 20px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+p {
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+  .profile-header img {
+    width: 100px;
+    height: 100px;
   }
-  
-  .profile-container h2 {
-    color: #333;
+
+  .profile-header h1 {
+    font-size: 20px;
   }
-  
-  .profile-details {
-    margin-top: 20px;
+
+  .profile-navigation a {
+    font-size: 14px;
+    padding: 8px;
+    margin: 0 8px;
   }
-  
-  .profile-details div {
-    margin-bottom: 10px;
+
+  h2 {
+    font-size: 18px;
   }
-  
-  .profile-details strong {
-    margin-right: 10px;
-    font-weight: bold;
-    color: #333;
-  }
-  
+}
