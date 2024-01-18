@@ -1,27 +1,15 @@
-/* JobBoardPage.css */
+.job {
+  background-image: url('../../components/images/bg-job.jpg') ;
+  background-size: cover;
+  background-repeat: no-repeat;
 
-.job-board-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .job-entry {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-  }
-  
-  .job-entry h3 {
-    color: #333;
-  }
-  
-  .job-entry p {
-    margin-top: 5px;
-    color: #555;
-  }
-  
+  height: 100vh;
+}
+
+.job-listing{
+  margin: 1rem;
+  padding: 1rem;
+  /* border: 1px solid black; */
+  border-radius: 10px;
+ box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}

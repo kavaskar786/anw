@@ -1,5 +1,9 @@
 /* HomePage.css */
 
+*{
+  font-family: 'Bodoni Moda', serif;
+}
+
 .homepage-container {
   background-image: url("../images/pexels-steve-johnson-1509534.jpg");
   background-size: cover;
@@ -13,8 +17,11 @@
 }
 
 .homepage-content {
+
+  border-radius: 10px;
   text-align: center;
   margin-bottom: 50px;
+
 }
 
 .carousel-section {

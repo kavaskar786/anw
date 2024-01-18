@@ -1,89 +1,92 @@
 /* Navigation.css */
 
-
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
+/* Common styles for all screen sizes */
 .navbar {
-    background-color: #333;
+    background-color:#333;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  
-  .navbar-left {
+}
+
+.navbar-left {
     display: flex;
     align-items: center;
-  }
-  
-  .logo {
+}
+
+.logo {
     width: 50px; /* Adjust the size as needed */
     height: auto;
     margin-right: 10px;
-  }
-  
-  .navbar-center ul {
+}
+
+.navbar-center ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-  }
-  
-  .navbar-center li {
-    margin-right: 10px;
-  }
-  
-  .navbar-center a {
-    text-decoration: none;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  
-    &:hover {
-      background-color: #555;
-    }
-  
-    &:active {
-      background-color: #777;
-    }
-  }
+}
 
-  .lgn_btn{
+.navbar-center li {
+    margin-right: 10px;
+}
+
+.navbar-center a,
+.lgn_btn,
+.nav-icon {
     text-decoration: none;
     color: white;
     padding: 8px 12px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-    margin-right: 10px;
-  
-    &:hover {
-      background-color: #555;
-    }
-  
-    &:active {
-      background-color: #777;
-    }
-  }
-  
-  .navbar-right {
+}
+
+.navbar-center a:hover,
+.lgn_btn:hover,
+.nav-icon:hover {
+    background-color: #555;
+}
+
+.navbar-center a:active,
+.lgn_btn:active,
+.nav-icon:active {
+    background-color: #777;
+}
+
+.navbar-right {
     display: flex;
     align-items: center;
-  }
-  
-  .nav-icon {
-    text-decoration: none;
-    color: white;
-    padding: 8px;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-  
-    &:hover {
-      background-color: #555;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
     }
-  
-    &:active {
-      background-color: #777;
+
+    .navbar-center {
+        margin-top: 10px;
     }
-  }
-  
+
+    .navbar-center ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar-center li {
+        margin: 5px 0;
+        text-align: center;
+    }
+
+    .lgn_btn {
+        margin-right: 0;
+        margin-top: 10px;
+    }
+
+    .navbar-right {
+        margin-top: 10px;
+    }
+}

@@ -4,22 +4,23 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f4f4f4; /* Set a background color for the page */
-   background-image: url('../images/pexels-steve-johnson-1509534.jpg'); /*Add your background image path */
+  background-color: #f4f4f4;
+  background-image: url('../images/pexels-steve-johnson-1509534.jpg');
   background-size: cover;
   background-position: center;
 }
 
 /* Login Container Styles */
 .login-container {
-  max-width: 400px;
+  max-width: 350px; /* Set a maximum width for larger screens */
+  width: 100%;
   padding: 20px;
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-  margin: 20px; /* Add margin for better spacing */
-  box-sizing: border-box; /* Ensure padding and border don't exceed max-width */
+  margin: 20px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,12 +52,12 @@
   border-radius: 5px;
   width: 100%;
   transition: border-color 0.3s ease-in-out;
-  box-sizing: border-box; /* Ensure padding is included in the width */
+  box-sizing: border-box;
 }
 
 .login-container input:focus {
   border-color: #007bff;
-  outline: none; /* Remove the outline on focus for better aesthetics */
+  outline: none;
 }
 
 /* Button Styles */
@@ -75,15 +76,13 @@
   background-color: #0056b3;
 }
 
-
 /* Checkbox Styles */
 .login-container .remember-me-checkbox {
   display: flex;
   align-items: center;
-  margin-bottom: 115px;
+  margin-bottom: 15px; /* Adjust spacing for smaller screens */
   width: 100%;
 }
-
 
 /* Error Message Styles */
 .error-message {
@@ -114,11 +113,11 @@
 
 /* Custom Fonts */
 body {
-  font-family: 'YourFont', sans-serif; /* Replace 'YourFont' with the desired font */
+  font-family: 'YourFont', sans-serif;
 }
 
 /* Responsive Design */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .login-container {
     max-width: 100%;
   }

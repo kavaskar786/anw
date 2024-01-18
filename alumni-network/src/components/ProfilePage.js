@@ -69,12 +69,12 @@ const ProfilePage = () => {
 
       <div className="profile-content">
         <section className="about-section" id="about">
-          <h2>About Me</h2>
-          <p>{user.bio}</p>
+          <h2 className='text-heading'>About Me</h2>
+          <p className='p-text'>{user.bio}</p>
         </section>
-
+          
         <section className="experience-section" id="experience">
-          <h2>Work Experience</h2>
+          <h2 className='text-heading'>Work Experience</h2>
           <ul>
             {user.workExperience.map((exp, index) => (
               <li key={index}>
@@ -85,7 +85,7 @@ const ProfilePage = () => {
         </section>
 
         <section className="education-section" id="education">
-          <h2>Education</h2>
+          <h2 className='text-heading'>Education</h2>
           <ul>
             {user.education.map((edu, index) => (
               <li key={index}>
@@ -96,7 +96,7 @@ const ProfilePage = () => {
         </section>
 
         <section className="skills-section" id="skills">
-          <h2>Skills</h2>
+          <h2 className='text-heading'>Skills</h2>
           <ul>
             {user.skills.map((skill, index) => (
               <li key={index}>{skill}</li>

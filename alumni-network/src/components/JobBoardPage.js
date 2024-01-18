@@ -1,29 +1,34 @@
-// JobBoardPage.js
 
-import React from 'react';
+import React from 'react'
 import './css/JobBoardPage.css';
-
-const JobBoardPage = () => {
-  // Placeholder job data (replace with actual job data)
-  const jobData = [
-    { id: 1, title: 'Software Engineer', company: 'TechCo', location: 'San Francisco, CA' },
-    { id: 2, title: 'Marketing Specialist', company: 'MarketingPro', location: 'New York, NY' },
-    // Add more job listings as needed
-  ];
-
+import Footer from './Footer';
+function JobBoardPage() {
   return (
-    <div>
-      <h2>Job Board Page</h2>
-      {jobData.map((job) => (
-        <div key={job.id} className="job-entry">
-          <h3>{job.title}</h3>
-          <p>Company: {job.company}</p>
-          <p>Location: {job.location}</p>
-          {/* Add more job details as needed */}
-        </div>
-      ))}
-    </div>
-  );
-};
+    <>
+      <section id="job-listings" className='p-5  job'>
+        <div className='container'>
+          <article className="job-listing ">
+            <h2>Software Developer</h2>
+            <p>Company: Tech Solutions Inc.</p>
+            <p>Location: City, State</p>
+            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+            <button>Apply Now</button>
+          </article>
 
-export default JobBoardPage;
+          <article className="job-listing">
+            <h2>Marketing Specialist</h2>
+            <p>Company: Marketing Pros LLC</p>
+            <p>Location: City, State</p>
+            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+            <button>Apply Now</button>
+          </article>
+        </div>
+
+
+      </section>
+      <Footer />
+    </>
+  )
+}
+
+export default JobBoardPage

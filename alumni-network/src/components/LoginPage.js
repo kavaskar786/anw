@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './css/LoginPage.css'; // Import the CSS file for styling
-
+import Footer from '../components/Footer';
 const LoginPage = () => {
   const [loginData, setLoginData] = useState({
     usernameOrEmail: '',
@@ -61,6 +61,7 @@ const LoginPage = () => {
   };
 
   return (
+    <div>
     <div className="login-page-container">
       <div className="login-container">
         <h2>Login Page</h2>
@@ -94,6 +95,8 @@ const LoginPage = () => {
           New user? <Link to="/registration">Register here</Link>.
         </p>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 };

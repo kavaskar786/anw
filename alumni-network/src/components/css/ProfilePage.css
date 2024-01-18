@@ -80,15 +80,15 @@
   color: #444;
 }
 
-h2 {
+.text-heading {
   color: #333;
   font-size: 20px;
-  border-bottom: 2px solid #ccc;
+  /* border-bottom: 2px solid #ccc; */
   padding-bottom: 5px;
   margin-bottom: 15px;
 }
 
-p {
+.p-text {
   color: #555;
   line-height: 1.5;
 }
@@ -113,4 +113,7 @@ p {
   h2 {
     font-size: 18px;
   }
+}
+.prof_cont{
+  background-image: url('../images/Profile.jpg');;
 }
