@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import AlumniService from './AlumniProfileCard'; 
 import './css/DirectoryPage.css';
+import Footer from '../components/Footer';
 
 const DirectoryPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,6 +19,7 @@ const DirectoryPage = () => {
   };
 
   return (
+    <div>
     <div className="Directcont">
     <div>
     <center>  <h2 className="directory-heading">Alumni Directory</h2></center>
@@ -46,6 +48,8 @@ const DirectoryPage = () => {
        <center> <p className="directory-no-results">No results found.</p></center>
       )}
     </div>
+    </div>
+    <Footer />
     </div>
   );
 };

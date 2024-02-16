@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import './css/MentorshipProgramPage.css';
+import Footer from '../components/Footer';
 
 const MentorshipProgramPage = () => {
   const [mentors, setMentors] = useState([]);
@@ -10,7 +11,7 @@ const MentorshipProgramPage = () => {
   useEffect(() => {
     // Replace this with your actual data fetching logic
     const fetchData = async () => {
-      // Simulating API call or data retrieval
+      // Simulating API call or data retrieval.
       const response = await fetch('your_mentors_api_endpoint');
       const data = await response.json();
 
@@ -21,6 +22,7 @@ const MentorshipProgramPage = () => {
   }, []);
 
   return (
+    <div>
     <div className="mentCont">
     <div className="mentorship-container">
       <h2 className="mentorship-header">Mentorship Program</h2>
@@ -49,6 +51,8 @@ const MentorshipProgramPage = () => {
         ))}
       </div>
     </div>
+    </div>
+    <Footer />
     </div>
   );
 };

@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column; /* Stack children vertically */
   align-items: center;
-  background-image: url('../images/Profile.jpg'); /* Replace 'your-background-image.jpg' with your image path */
+  background-image: url('../images/pexels-steve-johnson-1509534.jpg'); /* Replace 'your-background-image.jpg' with your image path */
   background-size: cover;
   background-position: center;
 }
@@ -19,7 +19,7 @@
 }
 
 .directory-heading {
-  color: #333; /* Dark text color */
+  color: #ffffff; /* Dark text color */
   font-size: 2em;
   margin-bottom: 20px;
 }
@@ -45,16 +45,17 @@
   flex: 1; 
   /* Take 1/4 of the space */
   margin-left: 10px; 
-  margin-bottom: .69em;
+  margin-bottom: .0em;
   /* Add some space between the input and button */
   /* padding: 13px 25px; Increase padding for a larger button */
   font-size: 1em;
-  background-color: #3498db; /* Blue button color */
+  background-color: #000406; /* Blue button color */
   color: #fff; /* White text color */
   border: none;
   /* border-radius: 5px; */
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: .5em;
 }
 
 .directory-search-button:hover {

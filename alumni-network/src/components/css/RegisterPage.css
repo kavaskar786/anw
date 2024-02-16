@@ -1,6 +1,6 @@
-/* SettingsPage.css */
+/* RegisterPage.css */
 
-.settings-page-container {
+.register-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +10,18 @@
   background-color: #f8f9fa; /* Set your desired background color */
 }
 
-.settings-form {
+.register-page-container button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  width: 100%;
+}
+
+.register-form {
   max-width: 400px;
   width: 100%;
   margin: auto;
@@ -31,8 +42,9 @@ label {
 
 #username,
 #email,
-#newPassword,
-#confirmNewPassword {
+#password,
+#confirmPassword,
+#role {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
@@ -41,7 +53,7 @@ label {
   box-sizing: border-box;
 }
 
-#updateSettingsButton {
+#registerButton {
   background-color: #007bff;
   color: #fff;
   padding: 10px 15px;
@@ -50,7 +62,7 @@ label {
   cursor: pointer;
 }
 
-#updateSettingsButton:hover {
+#registerButton:hover {
   background-color: #0056b3;
 }
 
@@ -59,7 +71,17 @@ p {
   text-align: center;
 }
 
-#settingsFooter {
+#loginLink {
+  color: #007bff;
+  text-decoration: none;
+  display: block; /* Make the link a block-level element */
+}
+
+#loginLink:hover {
+  text-decoration: underline;
+}
+
+#registrationFooter {
   margin-top: auto;
 }
 
