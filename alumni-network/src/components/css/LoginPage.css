@@ -122,3 +122,43 @@ body {
     max-width: 100%;
   }
 }
+
+
+/* Add this to your existing CSS file or create a new one */
+
+/* Add this to your existing CSS or create a new CSS file for popups */
+
+.scs_pp {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 300px;
+}
+
+.scs_p {
+  margin: 0;
+  font-size: 18px;
+  color: #4CAF50; 
+}
+
+.scs_btn {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+}
+
+.scs_btn:hover {
+  background-color: #45a049; 
+}
+

@@ -1,9 +1,11 @@
 // LoginPage.js
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import './css/LoginPage.css'; // Import the CSS file for styling
 import Footer from '../components/Footer';
+import axios from 'axios';
+
 const LoginPage = () => {
   const [loginData, setLoginData] = useState({
     usernameOrEmail: '',
@@ -12,6 +14,12 @@ const LoginPage = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  //const [error,setError] = useState('');
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const navigate = useNavigate();
+  const delay = ms => new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -33,10 +41,23 @@ const LoginPage = () => {
 
     try {
       setLoading(true);
+      const response = await axios.post('http://localhost:5000/login', {
+        usernameOrEmail,
+        password,
+      });
+
+      console.log(response.data);
       // Simulate API call for authentication (replace with actual authentication logic)
-      const isAuthenticated = false; // Replace with actual authentication logic
+      setShowSuccessPopup(true);
+
+      await delay(50000);
+      
+      navigate('/');
+
+      const isAuthenticated = true; // Replace with actual authentication logic
 
       if (isAuthenticated) {
+        
         if (rememberMe) {
           localStorage.setItem('userData', JSON.stringify({ usernameOrEmail }));
         }
@@ -48,7 +69,9 @@ const LoginPage = () => {
     } catch (error) {
       console.error('Error during authentication:', error);
       // Display a popup alert for general error
-      alert('An error occurred during authentication. Please try again.');
+      //setError('An error occurred during authentication. Please try again.',error);
+      console.error('Error during login:', error);
+      alert('Invalid username/email or password. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -94,6 +117,12 @@ const LoginPage = () => {
         <p>
           New user? <Link to="/registration">Register here</Link>.
         </p>
+        {showSuccessPopup && (
+        <div className="scs_pp">
+          <p className="scs_p">Login successful!</p>
+          <button onClick={() => setShowSuccessPopup(false)} className="scs_btn">Close</button>
+        </div>
+      )}
       </div>
     </div>
     <Footer />

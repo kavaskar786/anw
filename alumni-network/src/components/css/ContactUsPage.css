@@ -2,7 +2,9 @@
 /* ContactUsPage.css */
 
 /* ContactUsPage.css */
-
+*{
+  transition: 1.5s;
+}
 .background-container {
   margin: 0;
   padding: 0;

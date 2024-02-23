@@ -13,7 +13,7 @@ const Navigation = () => {
     <nav className="navbar">
       <div className="navbar-left">
         <Link to="/">
-          <img src="./logo.png" alt="Logo" className="logo" />
+          <img src="https://i.imghippo.com/files/1pJa21708615434.png" alt="Logo" className="logo" />
         </Link>
       </div>
 

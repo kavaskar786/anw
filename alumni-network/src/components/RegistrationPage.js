@@ -1,9 +1,10 @@
 // RegisterPage.js
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import './css/RegisterPage.css';
+import axios from 'axios';
 
 const RegisterPage = () => {
   const [registerData, setRegisterData] = useState({
@@ -15,6 +16,8 @@ const RegisterPage = () => {
   });
 
   const [error, setError] = useState('');
+  const  navigate= useNavigate(); // Get the history object
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,9 +27,9 @@ const RegisterPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     // Simple validation example
     if (!registerData.username.trim() || !registerData.email.trim() || !registerData.password.trim() || !registerData.confirmPassword.trim() || !registerData.role) {
       setError('Please fill in all fields.');
@@ -40,6 +43,19 @@ const RegisterPage = () => {
 
     // Clear the error state
     setError('');
+
+    try {
+      const response = await axios.post('http://localhost:5000/register', registerData);
+
+      console.log(response.data);
+      // Handle success or redirect to another page
+      setShowSuccessPopup(true);
+
+      navigate('/login');
+    } catch (error) {
+      console.error('Error during registration:', error);
+      setError('Registration failed. Please try again.');
+    }
   };
 
   return (
@@ -114,6 +130,13 @@ const RegisterPage = () => {
       <p id="loginLink">
         Already have an account? <Link to="/login" id="loginLink">Login here</Link>.
       </p>
+
+      {showSuccessPopup && (
+        <div className="success-popup">
+          <p>Registration successful!</p>
+          <button onClick={() => setShowSuccessPopup(false)}>Close</button>
+        </div>
+      )}
     </div>
     <Footer />
     </div>

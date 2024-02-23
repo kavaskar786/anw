@@ -1,7 +1,9 @@
 /* HomePage.css */
 
+
 *{
   font-family: 'Bodoni Moda', serif;
+  transition: 1.5;
 }
 
 .homepage-container {
@@ -66,4 +68,42 @@ footer {
   color: white;
   bottom: 0;
   width: 100%;
+}
+
+
+.carousel-section {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.carousel-section img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.slick-dots {
+  bottom: -30px;
+}
+
+.slick-prev,
+.slick-next {
+  font-size: 24px;
+  color: #007bff;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-section:hover .slick-prev,
+.carousel-section:hover .slick-next {
+  opacity: 1;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  color: #0056b3;
 }

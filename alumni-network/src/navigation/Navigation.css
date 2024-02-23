@@ -3,12 +3,17 @@
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
 /* Common styles for all screen sizes */
+
+*{
+    transition: 1.5s;
+}
 .navbar {
     background-color:#333;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position:fixed;
    
 }
 
