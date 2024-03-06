@@ -1,119 +1,293 @@
-/* ProfilePage.css */
+/* Add this to your existing ProfilePage.css file or create a new one */
 
-/* Base styles */
-.profile-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+/* Popup styles */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
   border-radius: 10px;
-  overflow: hidden;
-  font-family: 'Arial', sans-serif;
- /* background-image: url(''); 
-  background-size: cover; 
-  background-position: center; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  overflow-y: auto; /* Allow vertical scrolling */
+  max-height: 80vh; /* Set maximum height */
 }
 
-.profile-header {
-  text-align: center;
-}
-
-.profile-header img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
+.popup h2 {
+  color: #333;
+  font-size: 1.5rem;
   margin-bottom: 10px;
-  border: 3px solid #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease; /* Add smooth transition effect */
 }
 
-.profile-header img:hover {
-  transform: scale(1.1); /* Zoom in on hover */
-}
-
-.profile-header h1 {
-  margin: 0;
-  color: #333;
-  font-size: 24px;
-}
-
-.profile-header p {
-  margin-top: 5px;
+.popup p {
   color: #666;
+  margin-bottom: 20px;
 }
 
-.profile-navigation {
+.popup form {
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.profile-navigation a {
-  color: #555;
-  text-decoration: none;
-  padding: 10px;
-  margin: 0 10px;
-  font-weight: bold;
-  border-bottom: 2px solid transparent;
-  transition: border-bottom 0.3s ease;
-}
-
-.profile-navigation a:hover {
-  border-bottom: 2px solid #333;
-}
-
-.profile-content {
-  margin-top: 20px;
-}
-
-.about-section,
-.experience-section,
-.education-section,
-.skills-section {
-  margin-bottom: 30px;
-}
-
-.about-section p {
-  line-height: 1.5;
-  color: #444;
-}
-
-.text-heading {
+.popup label {
   color: #333;
-  font-size: 20px;
-  /* border-bottom: 2px solid #ccc; */
-  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+.popup input,
+.popup textarea,
+.popup select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.popup button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #45a049;
+}
+
+.profile-pic{
+  display: none;
+}
+
+/* Add more styles for other elements as needed */
+
+/* Content container styles */
+.prof_cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content_cont {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+/* Profile container styles */
+.profile_cont {
+  width: 30%;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+
+}
+
+
+
+
+
+.profile_pic_cont img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.profile_pic_cont button{
+  background-color: #ff5555;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  margin-left: 8px;
+}
+
+.profile_pic_cont button:hover {
+  background-color: #cc0000;
+  margin-bottom: 5px;
+}
+
+
+/* Details container styles */
+.details_cont {
+  width: 65%;
+}
+
+/* Skills container styles */
+.skills_cont {
+  margin-bottom: 30px;
+ 
+
+}
+
+.skills_cont h2 {
+  font-size: 24px;
   margin-bottom: 15px;
 }
 
-.p-text {
-  color: #555;
-  line-height: 1.5;
+.skills_cont div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-/* Responsive styles */
-@media screen and (max-width: 600px) {
-  .profile-header img {
-    width: 100px;
-    height: 100px;
-  }
-
-  .profile-header h1 {
-    font-size: 20px;
-  }
-
-  .profile-navigation a {
-    font-size: 14px;
-    padding: 8px;
-    margin: 0 8px;
-  }
-
-  h2 {
-    font-size: 18px;
-  }
+.skills_cont span {
+  font-size: 18px;
 }
-.prof_cont{
-  background-image: url('../images/Profile.jpg');;
+
+.skills_cont button {
+  background-color: #ff5555;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  margin-left: 8px;
 }
+
+.skills_cont button:hover {
+  background-color: #cc0000;
+  margin-bottom: 5px;
+}
+
+.skills_cont select {
+  padding: 8px;
+  margin-right: 10px;
+}
+
+.skills_cont select,
+.skills_cont button:last-child {
+  /* ... (no changes) */
+  margin-left: 24px; /* Move the "Add Skill" button more to the left */
+  border-radius: 8px; /* Increased corner radius for buttons */
+}
+
+/* Education container styles */
+.education_cont table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  margin-top: 15px
+}
+
+
+
+.education_cont th,
+.education_cont td {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: left;
+}
+
+
+.education_cont th {
+  background-color: #f2f2f2;
+  border-radius: 8px;
+}
+
+.education_cont td button {
+  background-color: #ff5555;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  margin-right: 5px;
+  border-radius: 8px;
+}
+
+.education_cont td button:hover {
+  background-color: #cc0000;
+}
+/* 
+.education_cont tr td:first-of-type {
+  border-left: 1px solid #c3c3c3;
+}
+
+.education_cont table tr td:last-of-type {
+  border-right: 1px solid #c3c3c3;
+} */
+
+/* :not(:first-child):not(:last-child)
+This will get any potential data tables that are added 
+that are not sides or corners however, they are border 
+data tables on top or bottom */    
+
+/* .education_cont table tr:first-of-type td:not(:first-child):not(:last-child){
+ border-top: 1px solid #c3c3c3;
+}
+
+
+.education_cont table tr:last-of-type td:not(:first-child):not(:last-child){
+ border-bottom: 1px solid #c3c3c3;
+}
+.education_cont table tr:first-of-type td:first-child {
+    border-top: 1px solid #c3c3c3;
+    border-top-left-radius: 5px;
+}
+
+.education_cont table tr:first-of-type td:last-child {
+    border-top: 1px solid #c3c3c3;
+    border-top-right-radius: 5px;
+}
+
+.education_cont table tr:last-of-type td:last-child {
+    border-right: 1px solid #c3c3c3;
+    border-bottom: 1px solid #c3c3c3;
+    border-bottom-right-radius: 5px;
+}
+
+.education_cont table tr:last-of-type td:first-child {
+    border-left: 1px solid #c3c3c3;
+    border-bottom:  1px solid #c3c3c3;
+    border-bottom-left-radius: 5px;
+} */
+
+
+
+/* Experience container styles */
+.experience_cont table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.experience_cont th,
+.experience_cont td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.experience_cont th {
+  background-color: #f2f2f2;
+  border-radius: 8px;
+}
+
+.experience_cont td button {
+  background-color: #ff5555;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  margin-right: 5px;
+  border-radius: 8px;
+}
+
+.experience_cont td button:hover {
+  background-color: #cc0000;
+}
+
+/* Add more styles as needed */

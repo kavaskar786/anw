@@ -107,7 +107,22 @@
   border-radius: 8px;
 }
 
+.suc_cont{
+  height: 50vh;
+}
+
 /* Enhancements based on .js classNames */
 .contact-container .contact-form button {
   margin-top: 10px; /* Adjust spacing between the form elements and the button */
 }
+
+
+footer {
+  background-color: #333;
+  padding: 5px;
+  text-align: center;
+  color: white;
+  bottom: 0;
+  width: 100%;
+}
+

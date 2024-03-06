@@ -23,15 +23,32 @@ const ContactUsPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic, e.g., sending an email or saving feedback
-    // Simulate form submission success
-    console.log('Form submitted:', formData);
-    setFormSubmitted(true);
+  
+    try {
+      const response = await fetch('http://localhost:5000/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        console.log('Email sent successfully');
+        setFormSubmitted(true);
+      } else {
+        console.error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
   };
 
+
   return (
+    <div className='cont'>
     <div className="background-container ">
     <div className="contact-container">
      <center><h2 className="contact-header">Contact Us</h2></center>
@@ -45,8 +62,10 @@ const ContactUsPage = () => {
       </p>
 
       {formSubmitted ? (
+        <div className='suc_cont'>
         <div className="success-message">
           Thank you for reaching out! We'll get back to you soon.
+        </div>
         </div>
       ) : (
         <form className="contact-form" onSubmit={handleSubmit}>
@@ -111,6 +130,7 @@ const ContactUsPage = () => {
           <button type="submit">Submit</button>
         </form>
       )}
+    </div>
     </div>
     <Footer/>
     </div>

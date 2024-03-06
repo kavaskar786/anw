@@ -18,6 +18,10 @@ const RegisterPage = () => {
   const [error, setError] = useState('');
   const  navigate= useNavigate(); // Get the history object
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const delay = ms => new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,12 +53,20 @@ const RegisterPage = () => {
 
       console.log(response.data);
       // Handle success or redirect to another page
-      setShowSuccessPopup(true);
-
-      navigate('/login');
+      if (response.data.success) {
+        setShowSuccessPopup(true);
+        await delay(1500);
+        navigate('/login');
+      } else {
+        setError(response.data.message);
+      }
     } catch (error) {
-      console.error('Error during registration:', error);
-      setError('Registration failed. Please try again.');
+      if (error.response && error.response.status === 400) {
+        setError('Username or email already exists. Please try another.');
+      } else {
+        console.error('Error during registration:', error);
+        setError('Registration failed. Please try again.');
+      }
     }
   };
 

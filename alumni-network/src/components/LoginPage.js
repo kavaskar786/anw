@@ -46,36 +46,40 @@ const LoginPage = () => {
         password,
       });
 
-      console.log(response.data);
-      // Simulate API call for authentication (replace with actual authentication logic)
-      setShowSuccessPopup(true);
+      const { success, userId } = response.data;
 
-      await delay(50000);
-      
-      navigate('/');
+      if (success) {
+        // Encrypt and set user ID in local storage
+        const encryptedUserId = btoa(userId); // Using simple base64 encoding for demonstration
+        localStorage.setItem('userId', encryptedUserId);
 
-      const isAuthenticated = true; // Replace with actual authentication logic
+        setShowSuccessPopup(true);
 
-      if (isAuthenticated) {
-        
-        if (rememberMe) {
-          localStorage.setItem('userData', JSON.stringify({ usernameOrEmail }));
+        await delay(1500);
+
+        navigate('/');
+
+        const isAuthenticated = true; // Replace with actual authentication logic
+
+        if (isAuthenticated) {
+          if (rememberMe) {
+            localStorage.setItem('userData', JSON.stringify({ usernameOrEmail, userId }));
+          }
+          console.log('User authenticated!');
+        } else {
+          alert('Invalid username/email or password. Please try again.');
         }
-        console.log('User authenticated!');
       } else {
-        // Display a popup alert for authentication error
         alert('Invalid username/email or password. Please try again.');
       }
     } catch (error) {
-      console.error('Error during authentication:', error);
-      // Display a popup alert for general error
-      //setError('An error occurred during authentication. Please try again.',error);
       console.error('Error during login:', error);
       alert('Invalid username/email or password. Please try again.');
     } finally {
       setLoading(false);
     }
   };
+
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
