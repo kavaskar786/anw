@@ -27,6 +27,8 @@ const Navigation = () => {
           <li><Link to="/discussion">Discussion Forum</Link></li>
           <li><Link to="/mentorship">Mentorship Program</Link></li>
           <li><Link to="/contact">Contact Us</Link></li>
+          <li><Link to="/gallery">Gallery</Link></li>
+          
         </ul>
       </div>
 

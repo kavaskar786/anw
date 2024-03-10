@@ -23,12 +23,41 @@ const NewEventFormPage = ({ onAddEvent }) => {
       [name]: value,
     }));
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onAddEvent(eventData);
-    navigate('/events');
+  const getUserId = () => {
+    const encryptedUserId = localStorage.getItem('userId');
+    const userId = encryptedUserId ? atob(encryptedUserId) : null;
+    return userId;
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const userId = getUserId();
+  
+    const eventDataWithUserId = { ...eventData, userId };
+  
+    try {
+      const response = await fetch('http://localhost:5000/addEvent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(eventDataWithUserId),
+      });
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        console.log('Event added successfully');
+        navigate('/events');
+      } else {
+        console.error('Error adding event:', data.message);
+      }
+    } catch (error) {
+      console.error('Error adding event:', error);
+    }
+  };
+  
 
   return (
     <div>

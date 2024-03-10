@@ -16,6 +16,7 @@ import MentorshipProgramPage from './components/MentorshipProgramPage';
 import SettingsPage from './components/SettingsPage';
 import ContactUsPage from './components/ContactUsPage';
 import NewEventFormPage from './components/NewEventFormPage';
+import Gallery from './components/GalleryPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/mentorship" element={<MentorshipProgramPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/contact" element={<ContactUsPage />} />
+          <Route path="/gallery" element={<Gallery />} />
         </Routes>
       </div>
     </Router>
