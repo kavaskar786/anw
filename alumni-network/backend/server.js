@@ -192,6 +192,105 @@ app.put('/updateProfile/:userId', async (req, res) => {
   }
 });
 
+app.get('/followers/:userId', (req, res) => {
+  const userId = req.params.userId;
+  
+  
+  // Query the database to fetch followers based on the userId
+  const query = 'SELECT followers FROM users WHERE id = ?';
+  db.query(query, [userId], (error, results) => {
+    if (error) {
+      console.error('Error fetching followers:', error);
+      res.status(500).json({ success: false, message: 'Error fetching followers' });
+    } else {
+      if (results.length === 0) {
+        res.status(404).json({ success: false, message: 'User not found' });
+      } else {
+        // Extract followers from the database result
+        console.log(results[0].followers);
+       const followers = results[0].followers.length>0 ? results[0].followers : 0; // Parse followers from JSON string
+        
+        // Query the database to fetch details of followers
+        const queryDetails = 'SELECT id, username, firstName, lastName, profilePicture FROM users WHERE id IN (?)';
+        db.query(queryDetails, [followers], (detailsError, detailsResults) => {
+          if (detailsError) {
+            console.error('Error fetching followers details:', detailsError);
+            res.status(500).json({ success: false, message: 'Error fetching followers details' });
+          } else {
+            console.log(detailsResults);
+            res.status(200).json({ success: true, followers: detailsResults });
+          }
+        });
+      }
+    }
+  });
+});
+
+app.get('/following/:userId', (req, res) => {
+  const userId = req.params.userId;
+
+  const query = 'SELECT following FROM users WHERE id = ?';
+
+  db.query(query, [userId], (error, results) => {
+    if (error) {
+      console.error('Error fetching following:', error);
+      res.status(500).json({ success: false, message: 'Error fetching following' });
+    } else {
+      if (results.length === 0) {
+        res.status(404).json({ success: false, message: 'User not found' });
+      } else {
+        const followingIds = results[0].following.length>0 ? results[0].following : 0;
+        console.log(followingIds);
+        // Now you can use followingIds to fetch following details from the database
+        const followingQuery = 'SELECT id, username, firstName, lastName, profilePicture FROM users WHERE id IN (?)';
+        db.query(followingQuery, [followingIds], (followingError, followingResults) => {
+          if (followingError) {
+            console.error('Error fetching following details:', followingError);
+            res.status(500).json({ success: false, message: 'Error fetching following details' });
+          } else {
+            res.status(200).json({ success: true, following: followingResults });
+          }
+        });
+      }
+    }
+  });
+});
+
+// Import necessary modules
+
+// Fetch messages between two users
+app.get('/messages/:userId/:otherUserId', (req, res) => {
+  const userId = req.params.userId;
+  const otherUserId = req.params.otherUserId;
+
+  // Fetch messages from the database for the given userId and otherUserId
+  const query = 'SELECT * FROM messages WHERE (senderId = ? AND receiverId = ?) OR (senderId = ? AND receiverId = ?) ORDER BY timestamp';
+  db.query(query, [userId, otherUserId, otherUserId, userId], (error, results) => {
+    if (error) {
+      console.error('Error fetching messages:', error);
+      res.status(500).json({ success: false, message: 'Error fetching messages' });
+    } else {
+      res.status(200).json({ success: true, messages: results });
+    }
+  });
+});
+
+// Send a message
+app.post('/send-message', (req, res) => {
+  const { senderId, receiverId, message } = req.body;
+
+  // Insert the message into the database
+  const query = 'INSERT INTO messages (senderId, receiverId, content) VALUES (?, ?, ?)';
+  db.query(query, [senderId, receiverId, message], (error) => {
+    if (error) {
+      console.error('Error sending message:', error);
+      res.status(500).json({ success: false, message: 'Error sending message' });
+    } else {
+      res.status(200).json({ success: true, message: 'Message sent successfully' });
+    }
+  });
+});
+
 
 app.post('/send-email', (req, res) => {
   const { name, email, graduationYear, major, message } = req.body;
@@ -302,7 +401,7 @@ app.get('/users/search', (req, res) => {
   }
 
   const searchQuery = `
-    SELECT id, username, firstName, lastName, role, profilePicture,
+    SELECT id, username, firstName, lastName, role, profilePicture, skills,
     JSON_CONTAINS(followers, JSON_QUOTE(?)) as isFollowing,
     JSON_CONTAINS(requested_mentees, JSON_QUOTE(?)) as isMentorshipRequested
     FROM users

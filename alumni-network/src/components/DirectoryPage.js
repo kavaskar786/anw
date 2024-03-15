@@ -133,6 +133,7 @@ const DirectoryPage = () => {
       console.error('Error requesting mentorship:', error);
     }
   };
+
   return (
     <div>
       <div className="Directcont">
@@ -153,6 +154,7 @@ const DirectoryPage = () => {
           {searchResults.length > 0 && (
             <ul className="directory-results-list">
               {searchResults.map((user) => (
+                
                 <li key={user.id} className="directory-results-item">
                   <div className="user-card">
                     <img
@@ -163,7 +165,11 @@ const DirectoryPage = () => {
                     <p>{user.username}</p>
                     <p>{user.firstName} {user.lastName}</p>
                     <p>{user.role}</p>
-                    <div className='button-container'>
+                    <div className="user-skills">
+                      {user.skills ? user.skills : 'Skills not available'}
+                    </div>
+
+                    <div className='button-container'>  
                     {user.isFollowing ? (
                       <button className='follow-button' onClick={() => handleUnfollow(user.id)}>Unfollow</button>
                       ) : (

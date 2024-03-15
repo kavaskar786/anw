@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import './css/ProfilePage.css';
 import Footer from '../components/Footer'; 
@@ -15,7 +16,7 @@ const ProfilePage = () => {
 
   const [user, setUser] = useState({
     firstName: 'John',
-    lastName: 'Doe',
+    lastName: null,
     email: 'john.doe@example.com',
     profilePicture: 'https://static.generated.photos/vue-static/face-generator/landing/demo-previews/sex.jpg',
     bio: 'Passionate about connecting people through technology.',
@@ -30,13 +31,111 @@ const ProfilePage = () => {
   const [newSkill, setNewSkill] = useState('');
   const [showImageUpload, setShowImageUpload] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-
-
+  const [following, setFollowing] = useState([]);
+  const [followers, setFollowers] = useState([]);
+  const [showFollowingPopup, setShowFollowingPopup] = useState(false);
+  const [showFollowersPopup, setShowFollowersPopup] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [messageInput, setMessageInput] = useState('');
+  const [messages, setMessages] = useState([]);
   const getUserId = () => {
     const encryptedUserId = localStorage.getItem('userId');
     const userId = encryptedUserId ? atob(encryptedUserId) : null;
     return userId;
   };
+  const userId = getUserId();
+  // Fetch following users when the button is clicked
+  const fetchFollowing = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/following/${userId}`);
+      const data = await response.json();
+      setFollowing(data.following);
+    } catch (error) {
+      console.error('Error fetching following users:', error);
+    }
+  };
+
+  // Fetch followers when the button is clicked
+  const fetchFollowers = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/followers/${userId}`);
+      const data = await response.json();
+      setFollowers(data.followers);
+    } catch (error) {
+      console.error('Error fetching followers:', error);
+    }
+  };
+
+  // Handle click on the "Following" button
+  const handleFollowingClick = () => {
+    fetchFollowing();
+    setShowFollowingPopup(true);
+  };
+
+  // Handle click on the "Followers" button
+  const handleFollowersClick = () => {
+    fetchFollowers();
+    setShowFollowersPopup(true);
+  };
+
+  // Close the following popup
+  const handleCloseFollowingPopup = () => {
+    setShowFollowingPopup(false);
+  };
+
+  // Close the followers popup
+  const handleCloseFollowersPopup = () => {
+    setShowFollowersPopup(false);
+  };
+
+  // Handle click on the "Message" button
+  const handleMessageClick = (user) => {
+    setSelectedUser(user);
+    fetchMessages(user.id);
+    handleCloseFollowersPopup();
+    handleCloseFollowingPopup();
+  };
+
+  // Fetch messages between the current user and the selected user
+  const fetchMessages = async (otherUserId) => {
+    try {
+      const response = await fetch(`http://localhost:5000/messages/${userId}/${otherUserId}`);
+      const data = await response.json();
+      setMessages(data.messages);
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+    }
+  };
+
+  // Send a message
+  const sendMessage = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/send-message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          senderId: userId,
+          receiverId: selectedUser.id,
+          message: messageInput
+        })
+      });
+      const data = await response.json();
+      if (data.success) {
+        // Message sent successfully, update UI as needed
+        setMessageInput('');
+        fetchMessages(selectedUser.id);
+      } else {
+        console.error('Error sending message:', data.message);
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+  };
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,6 +166,10 @@ const ProfilePage = () => {
 
     fetchData();
   }, []);
+
+
+
+
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -108,7 +211,7 @@ const ProfilePage = () => {
         skills: updatedSkills,
       };
     });
-    updateBackend();
+    console.log(user.skills)
   };
 
   const handleAddExperience = () => {
@@ -119,7 +222,6 @@ const ProfilePage = () => {
         workExperience: [...prevUser.workExperience, newExperience],
       }));
       setNewExperience({ jobTitle: '', company: '', year: '' });
-      updateBackend();
     } else {
       alert('Please fill in all fields for work experience.');
     }
@@ -136,7 +238,6 @@ const ProfilePage = () => {
           ...prevUser.workExperience.slice(index + 1),
         ],
       }));
-      updateBackend();
     }
   };
 
@@ -145,7 +246,6 @@ const ProfilePage = () => {
       ...prevUser,
       workExperience: [...prevUser.workExperience.slice(0, index), ...prevUser.workExperience.slice(index + 1)],
     }));
-    updateBackend();
   };
 
   const promptExperienceDetails = (defaultValues = { jobTitle: '', company: '', year: '' }) => {
@@ -163,7 +263,6 @@ const ProfilePage = () => {
         education: [...prevUser.education, newEducation],
       }));
       setNewEducation({ school: '', degree: '', year: '' });
-      updateBackend();
     } else {
       alert('Please fill in all fields for education.');
     }
@@ -171,7 +270,7 @@ const ProfilePage = () => {
 
   const handleEditEducation = (index) => {
     const updatedEducation = promptEducationDetails(user.education[index]);
-    if (updatedEducation) {
+    if (updatedEducation) { 
       setUser((prevUser) => ({
         ...prevUser,
         education: [
@@ -180,7 +279,6 @@ const ProfilePage = () => {
           ...prevUser.education.slice(index + 1),
         ],
       }));
-      updateBackend();
     }
   };
 
@@ -189,7 +287,7 @@ const ProfilePage = () => {
       ...prevUser,
       education: [...prevUser.education.slice(0, index), ...prevUser.education.slice(index + 1)],
     }));
-    updateBackend();
+  
   };
 
   const promptEducationDetails = (defaultValues = { school: '', degree: '', year: '' }) => {
@@ -207,65 +305,88 @@ const ProfilePage = () => {
         skills: [...prevUser.skills, newSkill],
       }));
       setNewSkill('');
-      updateBackend();
     } else {
       alert('Please select a skill.');
     }
   };
 
+
   const handleDeleteSkill = (index) => {
-    setUser((prevUser) => ({
-      ...prevUser,
-      skills: [...prevUser.skills.slice(0, index), ...prevUser.skills.slice(index + 1)],
-    }));
-    updateBackend();
+    setUser((prevUser) => {
+      const updatedSkills = [...prevUser.skills];
+      updatedSkills.splice(index, 1);
+      console.log(updatedSkills); // Make sure the correct skill is removed
+      return {
+        ...prevUser,
+        skills: updatedSkills,
+      };
+    });
   };
 
-  const updateBackend = async () => {
-    try {
-      const userId = getUserId();
-      let educationJSON = user.education;
-      let workExperienceJSON = user.workExperience;
-      let skillsJSON = user.skills;
+  useEffect(() => {
+    const updateBackend = async () => {
+      try {
+        const userId = getUserId();
+        let educationJSON = user.education;
+        let workExperienceJSON = user.workExperience;
+        let skillsJSON = user.skills;
 
-      // Check if the properties are in array format and convert to JSON
-      if (Array.isArray(user.education)) {
-        educationJSON = JSON.stringify(user.education);
+        // Check if the properties are in array format and convert to JSON
+        if (Array.isArray(user.education)) {
+          educationJSON = JSON.stringify(user.education);
+        }
+
+        if (Array.isArray(user.workExperience)) {
+          workExperienceJSON = JSON.stringify(user.workExperience);
+        }
+
+        if (Array.isArray(user.skills)) {
+          skillsJSON = JSON.stringify(user.skills);
+        }
+
+        // Send a request to update the user details only if there are changes
+        if (
+          user.firstName !== 'John' ||
+          user.lastName !== null ||
+          user.email !== 'john.doe@example.com' ||
+          user.profilePicture !== 'https://static.generated.photos/vue-static/face-generator/landing/demo-previews/sex.jpg' ||
+          user.bio !== 'Passionate about connecting people through technology.' ||
+          educationJSON !== '[]' ||  // Assuming educationJSON is empty array by default
+          workExperienceJSON !== '[]' ||  // Assuming workExperienceJSON is empty array by default
+          skillsJSON !== '[]'  // Assuming skillsJSON is empty array by default
+        ) {
+          const response = await fetch(`http://localhost:5000/updateProfile/${userId}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              firstName: user.firstName,
+              lastName: user.lastName,
+              profilePicture: user.profilePicture,
+              bio: user.bio,
+              education: educationJSON,
+              workExperience: workExperienceJSON,
+              skills: skillsJSON,
+            }),
+          });
+
+          const result = await response.json();
+
+          if (!result.success) {
+            console.error('Failed to update user details:', result.message);
+          }
+        }
+      } catch (error) {
+        console.error('Error updating user details:', error);
       }
+    };
 
-      if (Array.isArray(user.workExperience)) {
-        workExperienceJSON = JSON.stringify(user.workExperience);
-      }
-
-      if (Array.isArray(user.skills)) {
-        skillsJSON = JSON.stringify(user.skills);
-      }
-      // Send a request to update the user details
-      const response = await fetch(`http://localhost:5000/updateProfile/${userId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName: user.firstName,
-          lastName: user.lastName,
-          profilePicture: user.profilePicture,
-          bio: user.bio,
-          education: educationJSON,
-          workExperience: workExperienceJSON,
-          skills: skillsJSON,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (!result.success) {
-        console.error('Failed to update user details:', result.message);
-      }
-    } catch (error) {
-      console.error('Error updating user details:', error);
+    // Check if there are changes in user state before calling updateBackend
+    if (user) {
+      updateBackend();
     }
-  };
+  }, [user]);
 
   const handleUpdateDetails = async (updatedData) => {
     try {
@@ -316,377 +437,145 @@ const ProfilePage = () => {
       console.error('Error updating user details:', error);
     }
   };
+return (
+  <div className="prof_cont">
+    {showPopup && (
+      <div className="popup">
+        <h2>Complete Your Profile</h2>
+        <p>It looks like some details are missing from your profile. Please provide the missing information.</p>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            const updatedData = {
+              firstName: e.target.firstName.value,
+              lastName: e.target.lastName.value,
+              profilePicture: e.target.profilePicture.value,
+              bio: e.target.bio.value,
+              education: user.education,
+              workExperience: user.workExperience,
+              skills: user.skills,
+            };
+            handleUpdateDetails(updatedData);
+          }}
+        >
+          <label htmlFor="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" required />
 
-  return (
-    <div className="prof_cont">
-      {showPopup && (
-        <div className="popup">
-          <h2>Complete Your Profile</h2>
-          <p>It looks like some details are missing from your profile. Please provide the missing information.</p>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              const updatedData = {
-                firstName: e.target.firstName.value,
-                lastName: e.target.lastName.value,
-                profilePicture: e.target.profilePicture.value,
-                bio: e.target.bio.value,
-                education: user.education,
-                workExperience: user.workExperience,
-                skills: user.skills,
-              };
-              handleUpdateDetails(updatedData);
-            }}
-          >
-            <label htmlFor="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" required />
+          <label htmlFor="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" required />
 
-            <label htmlFor="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" required />
+          <div className='profile-pic'>
+          <label htmlFor="profilePicture">Profile Picture URL:</label>
+          <input type="text" id="profilePicture" name="profilePicture" value={user.profilePicture}  disabled />
+          </div>
 
-            <div className='profile-pic'>
-            <label htmlFor="profilePicture">Profile Picture URL:</label>
-            <input type="text" id="profilePicture" name="profilePicture" value={user.profilePicture}  disabled />
-            </div>
+          <label htmlFor="bio">Bio:</label>
+          <textarea id="bio" name="bio" required></textarea>
 
-            <label htmlFor="bio">Bio:</label>
-            <textarea id="bio" name="bio" required></textarea>
-
-            {/* Dropdown for Skills */}
-            <label htmlFor="skills">Skills:</label>
-            {user.skills !== null && user.skills !== undefined && Array.isArray(user.skills) && user.skills.length > 0? (
-              <div>
-                {user.skills.map((skill, index) => (
-                  <div key={index}>
-                    <span>{skill}</span>
-                    <button type="button" onClick={() => handleRemoveSkill(index)}>
-                      Remove
-                    </button>
-                  </div>
-                ))}
-                
-                <select value={newSkill} onChange={(e) => setNewSkill(e.target.value)}>
-                  <option value="" disabled>
-                    Select a skill
-                  </option>
-                  {availableSkills.map((skill) => (
-                    <option key={skill} value={skill}>
-                      {skill}
-                    </option>
-                  ))}
-                </select>
-                <button type="button" onClick={handleAddSkill}>
-                  Add Skill
-                </button>
-              </div>
-            ) : (
-              <div>
-                <p>No skills data available.</p>
-                <select value={newSkill} onChange={(e) => setNewSkill(e.target.value)}>
-                  <option value="" disabled>
-                    Select a skill
-                  </option>
-                  {availableSkills.map((skill) => (
-                    <option key={skill} value={skill}>
-                      {skill}
-                    </option>
-                  ))}
-                </select>
-                <button type="button" onClick={handleAddSkill}>
-                  Add Skill
-                </button>
-              </div>
-            )}
-
-            {/* Table for Education */}
-            <label>Education:</label>
-            {user.education !== null && user.education !== undefined && Array.isArray(user.education) && user.education.length > 0? (
-              <table>
-                <thead>
-                  <tr>
-                    <th>School</th>
-                    <th>Degree</th>
-                    <th>Year</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {user.education.map((edu, index) => (
-                    <tr key={index}>
-                      <td>{edu.school}</td>
-                      <td>{edu.degree}</td>
-                      <td>{edu.year}</td>
-                      <td>
-                        <button onClick={() => handleEditEducation(index)}>Edit</button>
-                        <button onClick={() => handleDeleteEducation(index)}>Delete</button>
-                      </td>
-                    </tr>
-                  ))}
-                  {/* Table row for adding new education entry */}
-                  <tr>
-                    <td>
-                      <input
-                        type="text"
-                        value={newEducation.school}
-                        onChange={(e) => setNewEducation({ ...newEducation, school: e.target.value })}
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        value={newEducation.degree}
-                        onChange={(e) => setNewEducation({ ...newEducation, degree: e.target.value })}
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        value={newEducation.year}
-                        onChange={(e) => setNewEducation({ ...newEducation, year: e.target.value })}
-                      />
-                    </td>
-                    <td>
-                      <button type="button" onClick={handleAddEducation}>
-                        Add
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            ) : (
-              <div>
-                <p>No education data available.</p>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>School</th>
-                      <th>Degree</th>
-                      <th>Year</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* Table row for adding new education entry */}
-                    <tr>
-                      <td>
-                        <input
-                          type="text"
-                          value={newEducation.school}
-                          onChange={(e) => setNewEducation({ ...newEducation, school: e.target.value })}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          value={newEducation.degree}
-                          onChange={(e) => setNewEducation({ ...newEducation, degree: e.target.value })}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          value={newEducation.year}
-                          onChange={(e) => setNewEducation({ ...newEducation, year: e.target.value })}
-                        />
-                      </td>
-                      <td>
-                        <button type="button" onClick={handleAddEducation}>
-                          Add
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            )}
-
-            {/* Table for Work Experience */}
-            <label>Work Experience:</label>
-            {user.workExperience !== null && user.workExperience !== undefined && Array.isArray(user.workExperience) && user.workExperience.length > 0? (
-              <table>
-                <thead>
-                  <tr>
-                    <th>Job Title</th>
-                    <th>Company</th>
-                    <th>Year</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {user.workExperience.map((exp, index) => (
-                    <tr key={index}>
-                      <td>{exp.jobTitle}</td>
-                      <td>{exp.company}</td>
-                      <td>{exp.year}</td>
-                      <td>
-                        <button onClick={() => handleEditExperience(index)}>Edit</button>
-                        <button onClick={() => handleDeleteExperience(index)}>Delete</button>
-                      </td>
-                    </tr>
-                  ))}
-                  {/* Table row for adding new work experience entry */}
-                  <tr>
-                    <td>
-                      <input
-                        type="text"
-                        value={newExperience.jobTitle}
-                        onChange={(e) => setNewExperience({ ...newExperience, jobTitle: e.target.value })}
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        value={newExperience.company}
-                        onChange={(e) => setNewExperience({ ...newExperience, company: e.target.value })}
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        value={newExperience.year}
-                        onChange={(e) => setNewExperience({ ...newExperience, year: e.target.value })}
-                      />
-                    </td>
-                    <td>
-                      <button type="button" onClick={handleAddExperience}>
-                        Add
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            ) : (
-              <div>
-                <p>No work experience data available.</p>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Job Title</th>
-                      <th>Company</th>
-                      <th>Year</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* Table row for adding new work experience entry */}
-                    <tr>
-                      <td>
-                        <input
-                          type="text"
-                          value={newExperience.jobTitle}
-                          onChange={(e) => setNewExperience({ ...newExperience, jobTitle: e.target.value })}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          value={newExperience.company}
-                          onChange={(e) => setNewExperience({ ...newExperience, company: e.target.value })}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          value={newExperience.year}
-                          onChange={(e) => setNewExperience({ ...newExperience, year: e.target.value })}
-                        />
-                      </td>
-                      <td>
-                        <button type="button" onClick={handleAddExperience}>
-                          Add
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            )}
-
-            <button type="submit">Save Changes</button>
-          </form>
-        </div>
-      )}
-
-      <div className="content_cont">
-        <div className="profile_cont">
-          <div className="profile_pic_cont">
-            {console.log("alumni-network/backend/images/"+user.profilePicture)}
-            <img src={user.profilePicture} alt="Profile" />
-            <pre>
+          {/* Dropdown for Skills */}
+          <label htmlFor="skills">Skills:</label>
+          {user.skills !== null && user.skills !== undefined && Array.isArray(user.skills) && user.skills.length > 0? (
+            <div>
+              {user.skills.map((skill, index) => (
+                <div key={index}>
+                  <span>{skill}</span>
+                  <button type="button" onClick={() => handleRemoveSkill(index)}>
+                    Remove
+                  </button>
+                </div>
+              ))}
               
-            </pre>
-            <center><button type="button" className='edit-image-btn' onClick={() => setShowImageUpload(true)}>Edit image</button></center>
-            {showImageUpload && (
-                    <div className="popup">
-                      <h2>Edit Profile Picture</h2>
-                      <input type="file" accept="image/*" onChange={handleImageChange} />
-                      <button onClick={handleImageUpload}>Upload</button>
-                      <button onClick={() => setShowImageUpload(false)}>Cancel</button>
-                    </div>
-                  )}
-
-          </div>
-          <div className="name_cont">
-            <h1>
-              {user.firstName} {user.lastName}
-            </h1>
-          </div>
-          <div className="bio_cont">
-            <p>{user.bio}</p>
-          </div>
-        </div>
-
-        <div className="details_cont">
-          <div className="skills_cont">
-            <h2>Skills</h2>
-            {user.skills !== null && user.skills !== undefined && Array.isArray(user.skills) && user.skills.length > 0? (
-              <div>
-                {user.skills.map((skill, index) => (
-                  <div key={index}>
-                    <span>{skill}</span>
-                    <button type="button" onClick={() => handleDeleteSkill(index)}>
-                      Remove
-                    </button>
-                  </div>
+              <select value={newSkill} onChange={(e) => setNewSkill(e.target.value)}>
+                <option value="" disabled>
+                  Select a skill
+                </option>
+                {availableSkills.map((skill) => (
+                  <option key={skill} value={skill}>
+                    {skill}
+                  </option>
                 ))}
-                
-                <select value={newSkill} onChange={(e) => setNewSkill(e.target.value)}>
-                  <option value="" disabled>
-                    Select a skill
+              </select>
+              <button type="button" onClick={handleAddSkill}>
+                Add Skill
+              </button>
+            </div>
+          ) : (
+            <div>
+              <p>No skills data available.</p>
+              <select value={newSkill} onChange={(e) => setNewSkill(e.target.value)}>
+                <option value="" disabled>
+                  Select a skill
+                </option>
+                {availableSkills.map((skill) => (
+                  <option key={skill} value={skill}>
+                    {skill}
                   </option>
-                  {availableSkills.map((skill) => (
-                    <option key={skill} value={skill}>
-                      {skill}
-                    </option>
-                  ))}
-                </select>
-                <button type="button" onClick={handleAddSkill}>
-                  Add Skill
-                </button>
-              </div>
-            ) : (
-              <div>
-                <p>No skills data available.</p>
-                <select value={newSkill} onChange={(e) => setNewSkill(e.target.value)}>
-                  <option value="" disabled>
-                    Select a skill
-                  </option>
-                  {availableSkills.map((skill) => (
-                    <option key={skill} value={skill}>
-                      {skill}
-                    </option>
-                  ))}
-                </select>
-                <button type="button" onClick={handleAddSkill}>
-                  Add Skill
-                </button>
-              </div>
-            )}
-          </div>
+                ))}
+              </select>
+              <button type="button" onClick={handleAddSkill}>
+                Add Skill
+              </button>
+            </div>
+          )}
 
-          <div className="education_cont">
-            <h2>Education</h2>
-            {user.education !== null && user.education !== undefined  && Array.isArray(user.workExperience) && user.workExperience.length? (
+          {/* Table for Education */}
+          <label>Education:</label>
+          {user.education !== null && user.education !== undefined && Array.isArray(user.education) && user.education.length > 0? (
+            <table>
+              <thead>
+                <tr>
+                  <th>School</th>
+                  <th>Degree</th>
+                  <th>Year</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {user.education.map((edu, index) => (
+                  <tr key={index}>
+                    <td>{edu.school}</td>
+                    <td>{edu.degree}</td>
+                    <td>{edu.year}</td>
+                    <td>
+                      <button onClick={() => handleEditEducation(index)}>Edit</button>
+                      <button onClick={() => handleDeleteEducation(index)}>Delete</button>
+                    </td>
+                  </tr>
+                ))}
+                {/* Table row for adding new education entry */}
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      value={newEducation.school}
+                      onChange={(e) => setNewEducation({ ...newEducation, school: e.target.value })}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={newEducation.degree}
+                      onChange={(e) => setNewEducation({ ...newEducation, degree: e.target.value })}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={newEducation.year}
+                      onChange={(e) => setNewEducation({ ...newEducation, year: e.target.value })}
+                    />
+                  </td>
+                  <td>
+                    <button type="button" onClick={handleAddEducation}>
+                      Add
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            <div>
+              <p>No education data available.</p>
               <table>
                 <thead>
                   <tr>
@@ -697,21 +586,6 @@ const ProfilePage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {user.education.map((edu, index) => (
-                    <tr key={index}>
-                      <td>{edu.school}</td>
-                      <td>{edu.degree}</td>
-                      <td>{edu.year}</td>
-                      <td>
-                        <button type="button" onClick={() => handleEditEducation(index)}>
-                          Edit
-                        </button>
-                        <button type="button" onClick={() => handleDeleteEducation(index)}>
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
                   {/* Table row for adding new education entry */}
                   <tr>
                     <td>
@@ -743,57 +617,67 @@ const ProfilePage = () => {
                   </tr>
                 </tbody>
               </table>
-            ) : (
-              <div>
-                <p>No education data available.</p>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>School</th>
-                      <th>Degree</th>
-                      <th>Year</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* Table row for adding new education entry */}
-                    <tr>
-                      <td>
-                        <input
-                          type="text"
-                          value={newEducation.school}
-                          onChange={(e) => setNewEducation({ ...newEducation, school: e.target.value })}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          value={newEducation.degree}
-                          onChange={(e) => setNewEducation({ ...newEducation, degree: e.target.value })}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          value={newEducation.year}
-                          onChange={(e) => setNewEducation({ ...newEducation, year: e.target.value })}
-                        />
-                      </td>
-                      <td>
-                        <button type="button" onClick={handleAddEducation}>
-                          Add
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
 
-          <div className="experience_cont">
-            <h2>Work Experience</h2>
-            {user.workExperience !== null && user.workExperience !== undefined  && Array.isArray(user.workExperience) && user.workExperience.length? (
+          {/* Table for Work Experience */}
+          <label>Work Experience:</label>
+          {user.workExperience !== null && user.workExperience !== undefined && Array.isArray(user.workExperience) && user.workExperience.length > 0? (
+            <table>
+              <thead>
+                <tr>
+                  <th>Job Title</th>
+                  <th>Company</th>
+                  <th>Year</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {user.workExperience.map((exp, index) => (
+                  <tr key={index}>
+                    <td>{exp.jobTitle}</td>
+                    <td>{exp.company}</td>
+                    <td>{exp.year}</td>
+                    <td>
+                      <button onClick={() => handleEditExperience(index)}>Edit</button>
+                      <button onClick={() => handleDeleteExperience(index)}>Delete</button>
+                    </td>
+                  </tr>
+                ))}
+                {/* Table row for adding new work experience entry */}
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      value={newExperience.jobTitle}
+                      onChange={(e) => setNewExperience({ ...newExperience, jobTitle: e.target.value })}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={newExperience.company}
+                      onChange={(e) => setNewExperience({ ...newExperience, company: e.target.value })}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={newExperience.year}
+                      onChange={(e) => setNewExperience({ ...newExperience, year: e.target.value })}
+                    />
+                  </td>
+                  <td>
+                    <button type="button" onClick={handleAddExperience}>
+                      Add
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            <div>
+              <p>No work experience data available.</p>
               <table>
                 <thead>
                   <tr>
@@ -804,21 +688,6 @@ const ProfilePage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {user.workExperience.map((exp, index) => (
-                    <tr key={index}>
-                      <td>{exp.jobTitle}</td>
-                      <td>{exp.company}</td>
-                      <td>{exp.year}</td>
-                      <td>
-                        <button type="button" onClick={() => handleEditExperience(index)}>
-                          Edit
-                        </button>
-                        <button type="button" onClick={() => handleDeleteExperience(index)}>
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
                   {/* Table row for adding new work experience entry */}
                   <tr>
                     <td>
@@ -850,59 +719,373 @@ const ProfilePage = () => {
                   </tr>
                 </tbody>
               </table>
-            ) : (
-              <div>
-                <p>No work experience data available.</p>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Job Title</th>
-                      <th>Company</th>
-                      <th>Year</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* Table row for adding new work experience entry */}
-                    <tr>
-                      <td>
-                        <input
-                          type="text"
-                          value={newExperience.jobTitle}
-                          onChange={(e) => setNewExperience({ ...newExperience, jobTitle: e.target.value })}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          value={newExperience.company}
-                          onChange={(e) => setNewExperience({ ...newExperience, company: e.target.value })}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          value={newExperience.year}
-                          onChange={(e) => setNewExperience({ ...newExperience, year: e.target.value })}
-                        />
-                      </td>
-                      <td>
-                        <button type="button" onClick={handleAddExperience}>
-                          Add
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
+
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    )}
+
+    <div className="content_cont">
+      <div className="profile_cont">
+        <div className="profile_pic_cont">
+          <img src={user.profilePicture} alt="Profile" />
+          <pre>
+            
+          </pre>
+          <center><button type="button" className='edit-image-btn' onClick={() => setShowImageUpload(true)}>Edit image</button></center>
+          {showImageUpload && (
+                  <div className="popup">
+                    <h2>Edit Profile Picture</h2>
+                    <input type="file" accept="image/*" onChange={handleImageChange} />
+                    <button onClick={handleImageUpload}>Upload</button>
+                    <button onClick={() => setShowImageUpload(false)}>Cancel</button>
+                  </div>
+                )}
+
         </div>
+        <div className="name_cont">
+          <h1>
+            {user.firstName} {user.lastName}
+          </h1>
+        </div>
+        <div className="bio_cont">
+          <p>{user.bio}</p>
+        </div>
+         {/* Button to show following users */}
+      <button onClick={handleFollowingClick}>Following</button>
+
+{/* Popup to display following users */}
+{showFollowingPopup && (
+  <div className="popup">
+    <div className="popup-content">
+      <span className="close" onClick={handleCloseFollowingPopup}>&times;</span>
+      <h2>Following</h2>
+      <ul>
+        {following.map(user => (
+          <li key={user.id}>
+            <img src={user.profilePicture} alt="Profile" />
+            <p>Username: {user.username}</p>
+            <p>Name: {user.firstName} {user.lastName}</p>
+            <button onClick={() => handleMessageClick(user)}>Message</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+)}
+
+{/* Button to show followers */}
+<button onClick={handleFollowersClick}>Followers</button>
+
+{/* Popup to display followers */}
+{showFollowersPopup && (
+  <div className="popup">
+    <div className="popup-content">
+      <span className="close" onClick={handleCloseFollowersPopup}>&times;</span>
+      <h2>Followers</h2>
+      <ul>
+        {followers.map(user => (
+          <li key={user.id}>
+            <img src={user.profilePicture} alt="Profile" />
+            <p>Username: {user.username}</p>
+            <p>Name: {user.firstName} {user.lastName}</p>
+            <button onClick={() => handleMessageClick(user)}>Message</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+)}
+
+{/* Chat interface */}
+{selectedUser && (
+  <div>
+    <h2>Chat with {selectedUser.username}</h2>
+    {/* Display messages */}
+    <ul>
+      {messages.map((message, index) => (
+        <li key={index}>
+          <p>{message.senderId === parseInt(userId) ? 'You' : selectedUser.username}:{message.content}</p>
+        </li>
+      ))}
+    </ul>
+    {/* Message input */}
+    <input type="text" value={messageInput} onChange={(e) => setMessageInput(e.target.value)} />
+    {/* Send message button */}
+    <button onClick={sendMessage}>Send</button>
+  </div>
+)}
       </div>
 
-      <Footer />
+      <div className="details_cont">
+        <div className="skills_cont">
+          <h2>Skills</h2>
+          {user.skills !== null && user.skills !== undefined && Array.isArray(user.skills) && user.skills.length > 0? (
+            <div>
+              {user.skills.map((skill, index) => (
+                <div key={index}>
+                  <span>{skill}</span>
+                  <button type="button" onClick={() => handleDeleteSkill(index)}>
+                    Remove
+                  </button>
+                </div>
+              ))}
+              
+              <select value={newSkill} onChange={(e) => setNewSkill(e.target.value)}>
+                <option value="" disabled>
+                  Select a skill
+                </option>
+                {availableSkills.map((skill) => (
+                  <option key={skill} value={skill}>
+                    {skill}
+                  </option>
+                ))}
+              </select>
+              <button type="button" onClick={handleAddSkill}>
+                Add Skill
+              </button>
+            </div>
+          ) : (
+            <div>
+              <p>No skills data available.</p>
+              <select value={newSkill} onChange={(e) => setNewSkill(e.target.value)}>
+                <option value="" disabled>
+                  Select a skill
+                </option>
+                {availableSkills.map((skill) => (
+                  <option key={skill} value={skill}>
+                    {skill}
+                  </option>
+                ))}
+              </select>
+              <button type="button" onClick={handleAddSkill}>
+                Add Skill
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="education_cont">
+          <h2>Education</h2>
+          {user.education !== null && user.education !== undefined  && Array.isArray(user.workExperience) && user.workExperience.length? (
+            <table>
+              <thead>
+                <tr>
+                  <th>School</th>
+                  <th>Degree</th>
+                  <th>Year</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {user.education.map((edu, index) => (
+                  <tr key={index}>
+                    <td>{edu.school}</td>
+                    <td>{edu.degree}</td>
+                    <td>{edu.year}</td>
+                    <td>
+                      <button type="button" onClick={() => handleEditEducation(index)}>
+                        Edit
+                      </button>
+                      <button type="button" onClick={() => handleDeleteEducation(index)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {/* Table row for adding new education entry */}
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      value={newEducation.school}
+                      onChange={(e) => setNewEducation({ ...newEducation, school: e.target.value })}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={newEducation.degree}
+                      onChange={(e) => setNewEducation({ ...newEducation, degree: e.target.value })}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={newEducation.year}
+                      onChange={(e) => setNewEducation({ ...newEducation, year: e.target.value })}
+                    />
+                  </td>
+                  <td>
+                    <button type="button" onClick={handleAddEducation}>
+                      Add
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            <div>
+              <p>No education data available.</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>School</th>
+                    <th>Degree</th>
+                    <th>Year</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* Table row for adding new education entry */}
+                  <tr>
+                    <td>
+                      <input
+                        type="text"
+                        value={newEducation.school}
+                        onChange={(e) => setNewEducation({ ...newEducation, school: e.target.value })}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={newEducation.degree}
+                        onChange={(e) => setNewEducation({ ...newEducation, degree: e.target.value })}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={newEducation.year}
+                        onChange={(e) => setNewEducation({ ...newEducation, year: e.target.value })}
+                      />
+                    </td>
+                    <td>
+                      <button type="button" onClick={handleAddEducation}>
+                        Add
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+
+        <div className="experience_cont">
+          <h2>Work Experience</h2>
+          {user.workExperience !== null && user.workExperience !== undefined  && Array.isArray(user.workExperience) && user.workExperience.length? (
+            <table>
+              <thead>
+                <tr>
+                  <th>Job Title</th>
+                  <th>Company</th>
+                  <th>Year</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {user.workExperience.map((exp, index) => (
+                  <tr key={index}>
+                    <td>{exp.jobTitle}</td>
+                    <td>{exp.company}</td>
+                    <td>{exp.year}</td>
+                    <td>
+                      <button type="button" onClick={() => handleEditExperience(index)}>
+                        Edit
+                      </button>
+                      <button type="button" onClick={() => handleDeleteExperience(index)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {/* Table row for adding new work experience entry */}
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      value={newExperience.jobTitle}
+                      onChange={(e) => setNewExperience({ ...newExperience, jobTitle: e.target.value })}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={newExperience.company}
+                      onChange={(e) => setNewExperience({ ...newExperience, company: e.target.value })}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={newExperience.year}
+                      onChange={(e) => setNewExperience({ ...newExperience, year: e.target.value })}
+                    />
+                  </td>
+                  <td>
+                    <button type="button" onClick={handleAddExperience}>
+                      Add
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            <div>
+              <p>No work experience data available.</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Job Title</th>
+                    <th>Company</th>
+                    <th>Year</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* Table row for adding new work experience entry */}
+                  <tr>
+                    <td>
+                      <input
+                        type="text"
+                        value={newExperience.jobTitle}
+                        onChange={(e) => setNewExperience({ ...newExperience, jobTitle: e.target.value })}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={newExperience.company}
+                        onChange={(e) => setNewExperience({ ...newExperience, company: e.target.value })}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        value={newExperience.year}
+                        onChange={(e) => setNewExperience({ ...newExperience, year: e.target.value })}
+                      />
+                    </td>
+                    <td>
+                      <button type="button" onClick={handleAddExperience}>
+                        Add
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
-  );
+
+    <Footer />
+  </div>
+);
 };
 
 export default ProfilePage;

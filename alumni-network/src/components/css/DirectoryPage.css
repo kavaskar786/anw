@@ -104,6 +104,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
+}
+
+.user-skills {
+  /* Set max width and allow text to wrap */
+  max-width: 100%; /* Adjust this value as needed */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .user-profile-picture {

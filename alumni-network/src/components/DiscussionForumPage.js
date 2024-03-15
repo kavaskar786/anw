@@ -165,7 +165,7 @@ const DiscussionForumPage = () => {
               <h2>{selectedTopic.title}</h2>
               <div className="message-container" ref={messagesRef}>
                 {chatMessages.map((chatMsg, index) => (
-                  <div key={index} className={`message ${parseInt(chatMsg.userId) == parseInt(getUserId()) ? 'sent' : 'received'}`}>
+                  <div key={index} className={`message ${parseInt(chatMsg.userId) === parseInt(getUserId()) ? 'sent' : 'received'}`}>
                     <p className='msg_test'>{chatMsg.username}: {chatMsg.message}</p>
                   </div>
                 ))}
