@@ -6,8 +6,10 @@
   align-items: center;
   justify-content: space-between;
   min-height: 100vh;
-  padding: 20px;
-  background-color: #f8f9fa; /* Set your desired background color */
+  padding: 40px;
+  background-color: #f8f9fa; 
+  background-image: url('../images/LgRbg.jpg'); 
+  /* Set your desired background color */
 }
 
 .register-page-container button {
@@ -25,10 +27,14 @@
   max-width: 400px;
   width: 100%;
   margin: auto;
-  background-color: #fff;
-  padding: 20px;
+  background-color: black;
+  color:black;
+  padding: 30px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(255, 255, 255, .2);
+  background: transparent;
+  backdrop-filter: blur(9px);
 }
 
 .form-group {
@@ -42,8 +48,6 @@ label {
 
 #username,
 #email,
-#password,
-#confirmPassword,
 #role {
   width: 100%;
   padding: 8px;
@@ -51,6 +55,30 @@ label {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  color: black;
+  background: white;
+
+}
+
+#confirmPassword{
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: black;
+  background: white;
+}
+#registerpassword{
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: black;
+  background: white;
 }
 
 #registerButton {
@@ -121,4 +149,19 @@ p {
   cursor: pointer;
   border-radius: 5px;
   font-size: 16px;
+}
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon input {
+  padding-right: 30px; /* Adjust this value based on the icon size */
+}
+
+.icom {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust this value based on the icon position */
+  transform: translateY(-50%);
+  color: black;
 }

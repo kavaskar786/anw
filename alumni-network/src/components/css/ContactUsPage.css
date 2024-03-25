@@ -8,12 +8,13 @@
 .background-container {
   margin: 0;
   padding: 0;
-  /*background-image: url('../images/abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner.jpg');*/
+  background-image: url('../images/Contactusbg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   font-family: 'Your Preferred Font', sans-serif;
   overflow: hidden; /* Add overflow to hide any potential content overflow */
+  
 }
 
 .root-container {
@@ -30,7 +31,10 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   background-color: rgba(248, 248, 248, 0.5); /* Adjust the alpha value for transparency */
   border-radius: 10px;
-  position: relative; /* Add position relative to ensure child elements are positioned relative to this container */
+  position: relative;
+  background: transparent; 
+  backdrop-filter: blur(20px);
+  /* Add position relative to ensure child elements are positioned relative to this container */
 }
 
 /* Rest of your existing styles */
@@ -125,4 +129,3 @@ footer {
   bottom: 0;
   width: 100%;
 }
-

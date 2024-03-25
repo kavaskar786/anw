@@ -1,14 +1,13 @@
 // Navigation.js
 
-
-
-// Navigation.js
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
 
 const Navigation = () => {
+  // Check if user is logged in
+  const isLoggedIn = localStorage.getItem('userId');
+
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -28,19 +27,27 @@ const Navigation = () => {
           <li><Link to="/mentorship">Mentorship Program</Link></li>
           <li><Link to="/contact">Contact Us</Link></li>
           <li><Link to="/gallery">Gallery</Link></li>
-          
         </ul>
       </div>
 
       <div className="navbar-right">
-        <Link to="/login" className="lgn_btn">Login</Link>
-        <Link className="lgn_btn" to="/registration">Register</Link>
-        <Link to="/profile" className="nav-icon">
-          <i className="fas fa-user-circle"></i>
-        </Link>
-        <Link to="/settings" className="nav-icon">
-          <i className="fas fa-cog"></i>
-        </Link>
+        {/* Render links based on user login status */}
+        {!isLoggedIn && (
+          <>
+            <Link to="/login" className="lgn_btn">Login</Link>
+            <Link className="lgn_btn" to="/registration">Register</Link>
+          </>
+        )}
+        {isLoggedIn && (
+          <>
+            <Link to="/profile" className="nav-icon">
+              <i className="fas fa-user-circle"></i>
+            </Link>
+            <Link to="/settings" className="nav-icon">
+              <i className="fas fa-cog"></i>
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );

@@ -55,9 +55,13 @@ const LoginPage = () => {
 
         setShowSuccessPopup(true);
 
-        await delay(1500);
+        await delay(500);
+
 
         navigate('/');
+        await delay(500);
+        window.location.reload();
+
 
         const isAuthenticated = true; // Replace with actual authentication logic
 

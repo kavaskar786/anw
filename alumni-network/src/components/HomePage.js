@@ -1,9 +1,8 @@
-// HomePage.js
-
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import Footer from '../components/Footer';
 import './css/HomePage.css'; // Import the CSS file for styling
+import Chatbot from '../components/Chatbot'; // Import the Chatbot component
 
 // Import slick-carousel styles
 import 'slick-carousel/slick/slick.css';
@@ -29,6 +28,14 @@ const HomePage = () => {
     autoplaySpeed: 5000,
   };
 
+  // State to manage chatbot visibility
+  const [showChatbot, setShowChatbot] = useState(false);
+
+  // Function to toggle chatbot visibility
+  const toggleChatbot = () => {
+    setShowChatbot(!showChatbot);
+  };
+
   return (
     <div>
       <div className="homepage-container">
@@ -50,8 +57,13 @@ const HomePage = () => {
           <h1>Welcome to the Alumni Network!</h1>
           <p>This is the homepage of our alumni networking web app.</p>
           <p>Feel free to explore and connect with fellow alumni.</p>
+          {/* Button to toggle chatbot */}
+         
         </div>
       </div>
+
+      {/* Render Chatbot component */}
+      {showChatbot && <Chatbot />}
 
       <Footer />
     </div>

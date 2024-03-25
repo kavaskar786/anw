@@ -470,6 +470,124 @@ app.post('/unfollow', (req, res) => {
 });
 
 
+//news page codes
+
+app.get('/api/news1', (req, res) => {
+  const query = 'SELECT * FROM news';
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching news:', err);
+      res.status(500).json({ success: false, message: 'Error fetching news' });
+    } else {
+      res.status(200).json({ success: true, news: results });
+    }
+  });
+});
+
+
+app.post('/api/news', (req, res) => {
+  const { title, content } = req.body;
+  const query = 'INSERT INTO news (title, content) VALUES (?, ?)';
+  db.query(query, [title, content], (err, result) => {
+    if (err) {
+      console.error('Error adding news:', err);
+      res.status(500).json({ success: false, message: 'Error adding news' });
+    } else {
+      res.status(200).json({ success: true, message: 'News added successfully', id: result.insertId });
+    }
+  });
+});
+
+app.put('/api/news/:id', (req, res) => {
+  const id = req.params.id;
+  const { title, content } = req.body;
+  const query = 'UPDATE news SET title=?, content=? WHERE id=?';
+  db.query(query, [title, content, id], (err) => {
+    if (err) {
+      console.error('Error updating news:', err);
+      res.status(500).json({ success: false, message: 'Error updating news' });
+    } else {
+      res.status(200).json({ success: true, message: 'News updated successfully' });
+    }
+  });
+});
+
+app.delete('/api/news/:id', (req, res) => {
+  const id = req.params.id;
+  const query = 'DELETE FROM news WHERE id=?';
+  db.query(query, [id], (err) => {
+    if (err) {
+      console.error('Error deleting news:', err);
+      res.status(500).json({ success: false, message: 'Error deleting news' });
+    } else {
+      res.status(200).json({ success: true, message: 'News deleted successfully' });
+    }
+  });
+});
+
+
+
+//job board
+
+// Endpoint to get all jobs
+app.get('/api/jobs', (req, res) => {
+  const query = 'SELECT * FROM jobs';
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching jobs:', err);
+      res.status(500).json({ success: false, message: 'Error fetching jobs' });
+    } else {
+      res.status(200).json({ success: true, jobs: results });
+    }
+  });
+});
+
+
+// Add job
+app.post('/api/jobs', (req, res) => {
+  const { title, company, location, description, userId } = req.body;
+  const query = 'INSERT INTO jobs (title, company, location, description, userId) VALUES (?, ?, ?, ?, ?)';
+  db.query(query, [title, company, location, description, userId], (err, result) => {
+    if (err) {
+      console.error('Error adding job:', err);
+      res.status(500).json({ success: false, message: 'Error adding job' });
+    } else {
+      res.status(200).json({ success: true, message: 'Job added successfully', id: result.insertId });
+    }
+  });
+});
+
+// Update job
+app.put('/api/jobs/:id', (req, res) => {
+  const id = req.params.id;
+  const { title, company, location, description } = req.body;
+  const query = 'UPDATE jobs SET title=?, company=?, location=?, description=? WHERE id=?';
+  db.query(query, [title, company, location, description, id], (err) => {
+    if (err) {
+      console.error('Error updating job:', err);
+      res.status(500).json({ success: false, message: 'Error updating job' });
+    } else {
+      res.status(200).json({ success: true, message: 'Job updated successfully' });
+    }
+  });
+});
+
+// Delete job
+app.delete('/api/jobs/:id', (req, res) => {
+  const id = req.params.id;
+  const query = 'DELETE FROM jobs WHERE id=?';
+  db.query(query, [id], (err) => {
+    if (err) {
+      console.error('Error deleting job:', err);
+      res.status(500).json({ success: false, message: 'Error deleting job' });
+    } else {
+      res.status(200).json({ success: true, message: 'Job deleted successfully' });
+    }
+  });
+});
+
+
+
 const getUserId = () => {
   const encryptedUserId = localStorage.getItem('userId');
   const userId = encryptedUserId ? atob(encryptedUserId) : null;

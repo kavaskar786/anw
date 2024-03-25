@@ -5,7 +5,7 @@
   justify-content: center;
   height: 100vh;
   background-color: #f4f4f4;
-  /* background-image: url('../images/pexels-steve-johnson-1509534.jpg'); */
+   background-image: url('../images/LgRbg.jpg'); 
   background-size: cover;
   background-position: center;
 }
@@ -16,7 +16,7 @@
   width: 100%;
   padding: 20px;
   background-color: #fff;
-  border-radius: 15px;
+  border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   margin: 20px;
@@ -24,11 +24,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .2);
+  background: transparent;
+  backdrop-filter: blur(9px);
+
+
 }
 
 /* Header Styles */
 .login-container h2 {
-  color: #333;
+  color: black;
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
@@ -42,10 +48,10 @@
 /* Input Styles */
 .login-container label {
   margin-bottom: 5px;
-  color: #555;
+  color: black;
 }
 
-.login-container input {
+/* .login-container input {
   padding: 12px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
@@ -53,7 +59,32 @@
   width: 100%;
   transition: border-color 0.3s ease-in-out;
   box-sizing: border-box;
+  background: white;
+  color: black;
+} */
+#Loginpassword{
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s ease-in-out;
+  box-sizing: border-box;
+  background: white;
+  color: black;
 }
+#LoginusernameOrEmail{
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s ease-in-out;
+  box-sizing: border-box;
+  background: white;
+  color: black;
+}
+
 
 .login-container input:focus {
   border-color: #007bff;
@@ -97,7 +128,7 @@
 .login-container p {
   text-align: center;
   margin-top: 15px;
-  color: #555;
+  color: black;
 }
 
 .login-container p a {
@@ -122,7 +153,6 @@ body {
     max-width: 100%;
   }
 }
-
 
 /* Add this to your existing CSS file or create a new one */
 
@@ -160,5 +190,43 @@ body {
 
 .scs_btn:hover {
   background-color: #45a049; 
+}
+
+#rememberMe {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+/* Icon Styles */
+.login-container div {
+  position: relative;
+}
+
+.login-container .icon {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  left: 280px; /* Adjust the left position as needed */
+  color:black;
+  font-size: 18px;
+  pointer-events: none; /* Ensure the icon doesn't interfere with input events */
+}
+/* Checkbox Styles */
+.login-container .remember-me-checkbox {
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 15px; */
+  width: 25%;
+  gap: 5px; /* Reduce the gap between checkbox and input */
+}
+
+/* Remember Me Label Styles */
+.login-container .remember-me-label {
+  margin: 2 2 2 2px;
+  color:black;
+}
+
+#password{
+  color:black;
 }
 
