@@ -97,12 +97,13 @@ function JobBoardPage() {
       <section id="job-listings" className='p-5 job'>
         <div className='container'>
           <form onSubmit={handleSubmit}>
-            <input type="text" name="title" placeholder="Title" value={formData.title} onChange={handleInputChange} required />
-            <input type="text" name="company" placeholder="Company" value={formData.company} onChange={handleInputChange} required />
-            <input type="text" name="location" placeholder="Location" value={formData.location} onChange={handleInputChange} required />
-            <textarea name="description" placeholder="Description" value={formData.description} onChange={handleInputChange} required />
+            <input type="text" id="job" name="title" placeholder="Title" value={formData.title} onChange={handleInputChange} required />
+            <input type="text"id="job" name="company" placeholder="Company" value={formData.company} onChange={handleInputChange} required />
+            <input type="text" id="job"name="location" placeholder="Location" value={formData.location} onChange={handleInputChange} required />
+            <textarea name="description"id="job" placeholder="Description" value={formData.description} onChange={handleInputChange} required />
             <button type="submit">{editId ? 'Update Job' : 'Add Job'}</button>
           </form>
+
 
           {jobs.map(job => (
             <article className="job-listing" key={job.id}>

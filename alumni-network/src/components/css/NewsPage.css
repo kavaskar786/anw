@@ -7,10 +7,15 @@
   justify-content: space-between;
   min-height: 100vh;
   padding: 20px;
-  background-image: url('../images/pexels-miguel-á-padriñán-255379.jpg'); /* Replace with your actual image URL */
+  background-image: url('../images/news_page_bg.png'); /* Replace with your actual image URL */
   background-size: cover;
   background-position: center;
-  color: #fff; /* Text color for better contrast */
+  color: black; /* Text color for better contrast */
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .news-content {
@@ -34,12 +39,12 @@
 }
 
 .news-item h2 {
-  color: #ffffff;
+  color: black;
   margin-bottom: 10px;
 }
 
 p {
-  color: #fff;
+  color: black;
 }
 
 .footer {
@@ -55,4 +60,11 @@ p {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: -1;
+}
+#news{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
+    "@google-cloud/dialogflow": "^6.4.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -16,6 +17,7 @@
     "react-router-dom": "^6.21.1",
     "react-router-page-transition": "^3.1.0",
     "react-scripts": "5.0.1",
+    "react-simple-chatbot": "^0.6.1",
     "react-slick": "^0.29.0",
     "react-spring": "^9.7.3",
     "react-transition-group": "^4.4.5",

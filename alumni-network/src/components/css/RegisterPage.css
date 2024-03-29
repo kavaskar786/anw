@@ -13,7 +13,7 @@
 }
 
 .register-page-container button {
-  background-color: #007bff;
+  background-color: #3498db;
   color: #fff;
   padding: 12px;
   border: none;
@@ -46,43 +46,76 @@ label {
   margin-bottom: 8px;
 }
 
-#username,
-#email,
-#role {
+#Registerusername{
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   width: 100%;
+  transition: border-color 0.3s ease-in-out;
+  box-sizing: border-box;
+  background: white;
+  color: black;
+}
+
+#Registeremail{
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s ease-in-out;
+  box-sizing: border-box;
+  background: white;
+  color: black;
+}
+#role {
+  /* width: 100%;
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
   color: black;
+  background: white; */
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s ease-in-out;
+  box-sizing: border-box;
   background: white;
+  color: black;
 
 }
 
 #confirmPassword{
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s ease-in-out;
   box-sizing: border-box;
-  color: black;
   background: white;
+  color: black;
 }
+
 #registerpassword{
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s ease-in-out;
   box-sizing: border-box;
-  color: black;
   background: white;
+  color: black;
 }
 
 #registerButton {
-  background-color: #007bff;
+  background-color: #3498db;
   color: #fff;
   padding: 10px 15px;
   border: none;
@@ -91,7 +124,7 @@ label {
 }
 
 #registerButton:hover {
-  background-color: #0056b3;
+  background-color: #217dbb;
 }
 
 p {
@@ -160,7 +193,7 @@ p {
 
 .icom {
   position: absolute;
-  top: 50%;
+  top: 40%;
   right: 10px; /* Adjust this value based on the icon position */
   transform: translateY(-50%);
   color: black;

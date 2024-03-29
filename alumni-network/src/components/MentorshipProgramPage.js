@@ -25,6 +25,7 @@ const MentorshipProgramPage = () => {
     <div>
     <div className="mentCont">
     <div className="mentorship-container">
+      <div className='ment_cont'>
       <h2 className="mentorship-header">Mentorship Program</h2>
 
       {/* Search and Filter Section */}
@@ -49,6 +50,7 @@ const MentorshipProgramPage = () => {
             <button className="connect-btn">Connect</button>
           </div>
         ))}
+      </div>
       </div>
     </div>
     </div>

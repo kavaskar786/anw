@@ -1,15 +1,29 @@
 // Navigation.js
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
 
 const Navigation = () => {
   // Check if user is logged in
   const isLoggedIn = localStorage.getItem('userId');
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 0;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <nav className="navbar">
+    <div className='parent1'>
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-left">
         <Link to="/">
           <img src="https://i.imghippo.com/files/1pJa21708615434.png" alt="Logo" className="logo" />
@@ -50,6 +64,7 @@ const Navigation = () => {
         )}
       </div>
     </nav>
+    </div>
   );
 };
 

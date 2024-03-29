@@ -1,9 +1,46 @@
 import React from 'react';
 import '../components/css/Gallery.css'; // Make sure to create a corresponding CSS file for styling
+import Slider from 'react-slick';
+// Import slick-carousel styles
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+
+ // Sample data for image carousel
+ const carouselData = [
+  { type: 'event', imageUrl: 'https://i.imghippo.com/files/gL3IW1711475415.png' },
+  { type: 'profile', imageUrl: 'https://i.imghippo.com/files/mLQze1711475557.png' },
+  { type: 'event', imageUrl: 'https://i.imghippo.com/files/4dfld1711475499.png' },
+  { type: 'profile', imageUrl: 'https://i.imghippo.com/files/E2dNr1711474083.jpg' },
+];
+
+// Slick carousel settings
+const carouselSettings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 5000,
+};
 
 const Gallery = () => {
   return (
+    <div className="gallery-bg">
+    <div className='gallery-container'>
+        {/* Image Carousel */}
+        <div className="carousel-section">
+            <Slider {...carouselSettings}>
+              {carouselData.map((item, index) => (
+                <div key={index}>
+                  <img src={item.imageUrl} alt="" />
+                </div>
+              ))}
+            </Slider>
+          </div>
     <div className="gallery">
+       
       <div className="image-container">
 
         <img src="https://images.shiksha.com/mediadata/images/1532895148php6I9hS8.png" alt="Image3" />
@@ -79,6 +116,8 @@ const Gallery = () => {
         <img src="https://m.christuniversity.in/images/facPUB.jpg" alt="Image3" />
       </div>
 
+    </div>
+    </div>
     </div>
   );
 };

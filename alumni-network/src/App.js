@@ -24,8 +24,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const App = () => {
   return (
     <Router>
-      <div>
-        <Navigation />
+      <div className='nav1'>
+        <div>
+        <center><Navigation /></center>
+      </div>
 
         <Routes>
           <Route path="/" element={<HomePage />} />

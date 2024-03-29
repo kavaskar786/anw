@@ -73,7 +73,7 @@ const ContactUsPage = () => {
             <label htmlFor="name">Your Name:</label>
             <input
               type="text"
-              id="name"
+              id="contactname"
               name="name"
               value={formData.name}
               onChange={handleChange}
@@ -85,7 +85,7 @@ const ContactUsPage = () => {
             <label htmlFor="email">Your Email:</label>
             <input
               type="email"
-              id="email"
+              id="contactemail"
               name="email"
               value={formData.email}
               onChange={handleChange}
@@ -97,7 +97,7 @@ const ContactUsPage = () => {
             <label htmlFor="graduationYear">Graduation Year:</label>
             <input
               type="text"
-              id="graduationYear"
+              id="contactgraduationYear"
               name="graduationYear"
               value={formData.graduationYear}
               onChange={handleChange}
@@ -108,7 +108,7 @@ const ContactUsPage = () => {
             <label htmlFor="major">Major:</label>
             <input
               type="text"
-              id="major"
+              id="contactmajor"
               name="major"
               value={formData.major}
               onChange={handleChange}
@@ -118,7 +118,7 @@ const ContactUsPage = () => {
           <div className="form-group">
             <label htmlFor="message">Your Message:</label>
             <textarea
-              id="message"
+              id="contactmessage"
               name="message"
               rows="4"
               value={formData.message}

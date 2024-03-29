@@ -1,22 +1,56 @@
+/* Background image for job section */
 .job {
-  background-image: url('../../components/images/pexels-steve-johnson-1509534.jpg') ;
+  background-image: url('../../components/images/job_board_bg_image.png');
   background-size: cover;
   background-repeat: no-repeat;
-
   height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.container{
+  margin-top: 3.5em;
 }
 
-.job-listing{
+/* Styles for job listings */
+.job-listing {
   margin: 1rem;
   padding: 1rem;
-  /* border: 1px solid black; */
   border-radius: 10px;
-  color:white;
- box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -1px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
 }
 
-.job-listing button{
+/* Button inside job listing */
+.job-listing button {
+  background-color: rgba(0, 0, 0, 0.7); /* Slightly less transparent black for buttons */
+  border-radius: 5px; /* Add this line */
+  color: white;
+  padding: 0.5em 1em;
+  border: none;
+  cursor: pointer;
   
-  background-color: black;
-  border-radius:.5em;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effects */
+.job-listing:hover {
+  transform: translateY(-5px);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 12px 15px -6px, rgba(0, 0, 0, 0.3) 0px 5px 10px -3px;
+}
+
+.job-listing button:hover {
+  background-color: rgba(0, 0, 0, 0.5); /* Slightly less transparent black on hover for buttons */
+}
+
+#job{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }

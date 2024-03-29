@@ -27,12 +27,57 @@
     grid-auto-flow: dense;
     padding: 20px; /* Add padding to the gallery */
   }
+  .carousel-section {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+    margin-bottom: 1em;
+    position: relative;
+  }
+  
+  .carousel-section h2 {
+    margin-bottom: 10px;
+  }
+  
+  .slick-dots {
+    bottom: -30px;
+  }
+  
+ 
+  
+  .carousel-section:hover .slick-prev,
+  .carousel-section:hover .slick-next {
+    opacity: 1;
+  }
+  
+  .slick-prev:hover,
+  .slick-next:hover {
+    color: #0056b3;
+  }
   
   .gallery > div {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 3,5em;
   }
+  
+.carousel-section {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.carousel-section img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.slick-dots {
+  bottom: -30px;
+}
+
   
   .gallery > div > img {
     width: 100%;
@@ -53,6 +98,27 @@
     text-align: center; /* Center the heading */
     margin-bottom: 10px; /* Adjust the space below the heading */
   }
-  .gallery{
-    background-color: #D6F9FD;
+
+.gallery-bg{
+
+  background-image: url('../../components/images/job_board_bg_image.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: auto;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+  .gallery-container{
+    
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3.7em;
+  height: auto;
+  ;
+  
+  
   }

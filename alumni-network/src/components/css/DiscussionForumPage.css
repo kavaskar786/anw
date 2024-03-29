@@ -7,16 +7,22 @@
   justify-content: space-between;
   min-height: 100vh;
   padding: 20px;
-  background-image: url('../images/pexels-miguel-á-padriñán-255379.jpg'); /* Replace with your actual image URL */
+  background-image: url('../images/disscussion_bg.png'); /* Replace with your actual image URL */
   background-size: cover;
   background-position: center;
   color: #fff; /* Text color for better contrast */
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .discussion-content {
   max-width: 800px;
   width: 100%;
   margin: auto;
+  margin-top: 3.5em;
 }
 
 .discussion-topic {

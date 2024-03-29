@@ -6,6 +6,8 @@ const DirectoryPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
+
+
   useEffect(() => {
     const handleSearch = async () => {
       try {
@@ -137,7 +139,7 @@ const DirectoryPage = () => {
   return (
     <div>
       <div className="Directcont">
-        <div>
+        <div className='content'>
           <center>
             <h2 className="directory-heading">Alumni Directory</h2>
           </center>
@@ -198,6 +200,7 @@ const DirectoryPage = () => {
             </center>
           )}
         </div>
+         
       </div>
       <Footer />
     </div>

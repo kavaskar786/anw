@@ -93,7 +93,7 @@
 
 /* Button Styles */
 .login-container button {
-  background-color: #007bff;
+  background-color: #3498db;
   color: #fff;
   padding: 12px;
   border: none;
@@ -104,7 +104,7 @@
 }
 
 .login-container button:hover {
-  background-color: #0056b3;
+  background-color: #217dbb;
 }
 
 /* Checkbox Styles */
@@ -114,6 +114,7 @@
   margin-bottom: 15px; /* Adjust spacing for smaller screens */
   width: 100%;
 }
+
 
 /* Error Message Styles */
 .error-message {
@@ -192,11 +193,11 @@ body {
   background-color: #45a049; 
 }
 
-#rememberMe {
+/* #rememberMe {
   display: flex;
   flex-direction: row;
   width: 100%;
-}
+} */
 /* Icon Styles */
 .login-container div {
   position: relative;
@@ -211,22 +212,34 @@ body {
   font-size: 18px;
   pointer-events: none; /* Ensure the icon doesn't interfere with input events */
 }
-/* Checkbox Styles */
-.login-container .remember-me-checkbox {
+/* Checkbox Styles
+.login-container .loginrememberme {
   display: flex;
   align-items: center;
   /* margin-bottom: 15px; */
-  width: 25%;
+  /* width: 25%;
   gap: 5px; /* Reduce the gap between checkbox and input */
+/* } */ 
+
+/* Remember Me Label Styles */
+/* .login-container .loginrememberme {
+  margin: 2 2 2 2px;
+  color:black;
+} */ 
+/* Checkbox Container Styles */
+.login-container .loginrememberme {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;  /* Adjust spacing as needed */
+   /* width: 100%;     Ensure it spans the entire width  */
 }
 
 /* Remember Me Label Styles */
-.login-container .remember-me-label {
-  margin: 2 2 2 2px;
-  color:black;
+.login-container .loginrememberme label {
+  margin-left: 5px; /* Adjust spacing between checkbox and label */
+  color: black;
 }
 
 #password{
   color:black;
 }
-

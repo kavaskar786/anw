@@ -14,6 +14,7 @@ const SettingsPage = () => {
   const userId = localStorage.getItem('userId');
 
   return (
+    <div className='settings-container'>
     <div>
       {userId ? ( // Check if userId exists
         <button onClick={handleLogout}>Logout</button>
@@ -21,6 +22,7 @@ const SettingsPage = () => {
         <Link to="/login">Login</Link> // Redirect to login page if userId does not exist
       )}
       <Footer />
+    </div>
     </div>
   );
 };

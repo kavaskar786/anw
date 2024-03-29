@@ -129,6 +129,7 @@ const DiscussionForumPage = () => {
     setShowMessagePopup(true);
   };
   return (
+    <div>
     <div className="discussion-forum-container">
       <div className="discussion-content">
         <h1>Discussion Forum</h1>
@@ -187,7 +188,8 @@ const DiscussionForumPage = () => {
         )}
       </div>
 
-      <Footer />
+    </div>
+    <Footer />
     </div>
   );
 };

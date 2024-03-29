@@ -1,0 +1,25 @@
+/* ParallaxSection.css */
+
+.parallax-section {
+    height: 600px; /* Adjust height as needed */
+    background-image: url('https://source.unsplash.com/random/1920x1080'); /* Change the URL to your desired background image */
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .parallax-content {
+    color: #fff;
+  }
+  
+  .parallax-content h2 {
+    font-size: 3rem;
+  }
+  
+  .parallax-content p {
+    font-size: 1.2rem;
+  }
+  

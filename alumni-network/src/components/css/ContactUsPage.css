@@ -8,14 +8,20 @@
 .background-container {
   margin: 0;
   padding: 0;
-  background-image: url('../images/Contactusbg.jpg');
-  background-size: cover;
+  background-image: url('../images/contactus_bg_img.png');
+  background-size:cover;
   background-position: center;
   background-repeat: no-repeat;
   font-family: 'Your Preferred Font', sans-serif;
   overflow: hidden; /* Add overflow to hide any potential content overflow */
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   
 }
+
 
 .root-container {
   display: flex;
@@ -33,7 +39,9 @@
   border-radius: 10px;
   position: relative;
   background: transparent; 
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(3px);
+  margin-top: 5em;
+  
   /* Add position relative to ensure child elements are positioned relative to this container */
 }
 
@@ -45,7 +53,6 @@
   color: #444;
 }
 
-/* ... (other styles) */
 
 
 .contact-details {
@@ -66,8 +73,43 @@
   margin-bottom: 10px;
   color: #555;
 }
+#contactname{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+#contactemail{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+#contactgraduationYear{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+#contactmajor{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+#contactmessage{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
 
-.contact-form input,
+/* .contact-form input,
 .contact-form textarea {
   padding: 14px;
   margin-bottom: 20px;
@@ -75,7 +117,7 @@
   border-radius: 6px;
   transition: border-color 0.3s ease;
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
+
 
 .contact-form input:focus,
 .contact-form textarea:focus {
