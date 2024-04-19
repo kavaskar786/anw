@@ -3,7 +3,7 @@
   background-image: url('../../components/images/job_board_bg_image.png');
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: auto;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -12,6 +12,55 @@
 }
 .container{
   margin-top: 3.5em;
+}
+
+.container h1{
+  color: #ffffff;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.job form{
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -1px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.job form input,.job form textarea{
+  color: rgb(0, 0, 0);
+}
+
+
+
+
+.job form:hover {
+  transform: translateY(-10px);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 12px 15px -6px, rgba(0, 0, 0, 0.3) 0px 5px 10px -3px;
+}
+
+.job form input:hover,.job form textarea:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: translateY(-5px);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 12px 15px -6px, rgba(0, 0, 0, 0.3) 0px 5px 10px -3px;
+}
+
+
+.job form button{
+  background-color: rgba(0, 0, 0, 0.7); /* Slightly less transparent black for buttons */
+  border-radius: 5px; /* Add this line */
+  color: white;
+  padding: 0.5em 1em;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s ease;
 }
 
 /* Styles for job listings */
@@ -33,7 +82,7 @@
   padding: 0.5em 1em;
   border: none;
   cursor: pointer;
-  
+  margin-right: 5px;
   transition: background-color 0.3s ease;
 }
 

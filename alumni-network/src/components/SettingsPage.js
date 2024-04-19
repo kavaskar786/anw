@@ -15,14 +15,18 @@ const SettingsPage = () => {
 
   return (
     <div className='settings-container'>
-    <div>
+    
+    <div className='set_container'>
+    <div className='log_btn_cont'>
       {userId ? ( // Check if userId exists
         <button onClick={handleLogout}>Logout</button>
       ) : (
         <Link to="/login">Login</Link> // Redirect to login page if userId does not exist
       )}
-      <Footer />
+      </div>
+      
     </div>
+    <Footer />
     </div>
   );
 };

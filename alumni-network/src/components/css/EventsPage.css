@@ -17,17 +17,36 @@
   max-width: 800px;
 }
 
+.evnt_cnt{
+  max-width: auto;
+  margin: 20px auto;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background-color: rgba(248, 248, 248, 0.5); /* Adjust the alpha value for transparency */
+  border-radius: 10px;
+  position: relative;
+  backdrop-filter: blur(3px);
+  margin-top: 5em;
+  color:  #B7410E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .event-item {
   margin-bottom: 20px;
   padding: 15px;
+  width: 800px;
   background-color: #ffffff; /* White background color */
   border-radius: 20px; /* Increased border-radius for bubble shape */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow for depth */
+  text-align: left;
 }
 
 .event-item h2 {
   margin-bottom: 10px;
-  color: #3498db; /* Updated text color */
+  color: #B7410E; /* Updated text color */
 }
 
 .event-item p {
@@ -36,7 +55,7 @@
 }
 
 .event-item a {
-  color: #3498db;
+  color: #B7410E;
   text-decoration: none;
   display: inline-block;
   margin-top: 10px;
@@ -48,7 +67,7 @@
 }
 
 .event-item button {
-  background-color: #3498db;
+  background-color: #B7410E;
   color: #ffffff;
   border: none;
   padding: 8px 15px;
@@ -57,9 +76,8 @@
   cursor: pointer;
 }
 
-.edit-event-button:hover,
-.delete-event-button:hover {
-  background-color: #2980b9; /* Darker color on hover */
+.event-item button:hover {
+  background-color: #7a2500; /* Darker color on hover */
 }
 
 .add-event-link {
@@ -67,10 +85,13 @@
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
+  background-color: #B7410E;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .add-event-link:hover {
-  text-decoration: underline;
+  background-color: #FFA500;
 }
 
 .edit-event-popup {

@@ -45,7 +45,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <div className="homepage-container" ref={parallaxRef} style={{ background: `url('https://i.imghippo.com/files/5OqjQ1711506134.png')`, backgroundSize: 'cover' }}>
+      <div className="homepage-container" ref={parallaxRef}>
         <div className="homepage-content">
           <div className='homepage_text'>
           <h1>Welcome to the Alumni Network!</h1>

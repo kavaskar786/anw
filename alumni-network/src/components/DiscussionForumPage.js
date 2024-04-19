@@ -135,13 +135,13 @@ const DiscussionForumPage = () => {
         <h1>Discussion Forum</h1>
 
         {/* New Post and Title Inputs */}
+        
         <input
             type="text"
             placeholder="Enter the title..."
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
           />
-        <div className="new-post-container">
           <textarea
             placeholder="Write your new post..."
             value={newPost}
@@ -149,7 +149,6 @@ const DiscussionForumPage = () => {
           />
  
           <button onClick={handleAddTopic}>Post</button>
-        </div>
 
         {/* Display discussion topics */}
         {discussionTopics.map((topic, index) => (

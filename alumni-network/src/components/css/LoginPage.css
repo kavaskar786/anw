@@ -5,7 +5,7 @@
   justify-content: center;
   height: 100vh;
   background-color: #f4f4f4;
-   background-image: url('../images/LgRbg.jpg'); 
+   background-image: url('../images/Designer\ \(20\).png'); 
   background-size: cover;
   background-position: center;
 }
@@ -51,49 +51,13 @@
   color: black;
 }
 
-/* .login-container input {
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  transition: border-color 0.3s ease-in-out;
-  box-sizing: border-box;
-  background: white;
-  color: black;
-} */
-#Loginpassword{
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  transition: border-color 0.3s ease-in-out;
-  box-sizing: border-box;
-  background: white;
-  color: black;
-}
-#LoginusernameOrEmail{
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  transition: border-color 0.3s ease-in-out;
-  box-sizing: border-box;
-  background: white;
-  color: black;
-}
 
 
-.login-container input:focus {
-  border-color: #007bff;
-  outline: none;
-}
+
 
 /* Button Styles */
 .login-container button {
-  background-color: #3498db;
+  background-color: #B7410E;
   color: #fff;
   padding: 12px;
   border: none;
@@ -101,19 +65,13 @@
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
   width: 100%;
+  margin-top: 17px;
 }
 
 .login-container button:hover {
-  background-color: #217dbb;
+  background-color: #7a2500;
 }
 
-/* Checkbox Styles */
-.login-container .remember-me-checkbox {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px; /* Adjust spacing for smaller screens */
-  width: 100%;
-}
 
 
 /* Error Message Styles */
@@ -133,19 +91,14 @@
 }
 
 .login-container p a {
-  color: #007bff;
+  color: #ec6a00;
   text-decoration: none;
   transition: color 0.3s ease-in-out;
 }
 
 .login-container p a:hover {
   text-decoration: underline;
-  color: #0056b3;
-}
-
-/* Custom Fonts */
-body {
-  font-family: 'YourFont', sans-serif;
+  color: black;
 }
 
 /* Responsive Design */
@@ -199,9 +152,7 @@ body {
   width: 100%;
 } */
 /* Icon Styles */
-.login-container div {
-  position: relative;
-}
+
 
 .login-container .icon {
   position: absolute;

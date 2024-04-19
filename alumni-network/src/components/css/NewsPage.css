@@ -10,7 +10,7 @@
   background-image: url('../images/news_page_bg.png'); /* Replace with your actual image URL */
   background-size: cover;
   background-position: center;
-  color: black; /* Text color for better contrast */
+  color: #2f1104; /* Text color for better contrast */
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
@@ -22,28 +22,49 @@
   max-width: 800px;
   width: 100%;
   margin: auto;
+  margin-top: 5em;
 }
 
 .news-item {
   margin-bottom: 20px;
   padding: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, .9);
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, .9);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
+  color:#B7410E;
 }
 
 .news-item:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.news-item button {
+  
+  background-color: #B7410E;
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  margin-left: 8px;
+}
+
+.news-item input {
+margin-bottom: 10px;
+}
+.news-item button:hover {
+  background-color: #7a2500;
 }
 
 .news-item h2 {
-  color: black;
+  color: #2f1104;
   margin-bottom: 10px;
 }
 
-p {
+.news-item p {
   color: black;
 }
 
@@ -68,3 +89,4 @@ p {
   border-radius: 5px;
   margin-bottom: 10px;
 }
+

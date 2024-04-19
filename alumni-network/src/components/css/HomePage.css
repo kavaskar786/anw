@@ -7,7 +7,7 @@
 }
 
 .homepage-container {
-  background-image: url('https://i.imghippo.com/files/eSbI71711476532.png');
+  background-image: url('https://i.imghippo.com/files/5OqjQ1711506134.png');
   background-size: cover;
   background-position: center;
   height: auto;
@@ -66,14 +66,6 @@
 .slick-prev:hover,
 .slick-next:hover {
   color: #0056b3;
-}
-footer {
-  background-color: #333;
-  padding: 5px;
-  text-align: center;
-  color: white;
-  bottom: 0;
-  width: 100%;
 }
 
 

@@ -8,7 +8,10 @@
   min-height: 100vh;
   padding: 40px;
   background-color: #f8f9fa; 
-  background-image: url('../images/LgRbg.jpg'); 
+  background-image: url('../images/Designer\ \(19\).png'); 
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
   /* Set your desired background color */
 }
 
@@ -24,8 +27,8 @@
 }
 
 .register-form {
-  max-width: 400px;
-  width: 100%;
+  max-width: 600px;
+  width: 600px;
   margin: auto;
   background-color: black;
   color:black;
@@ -35,6 +38,10 @@
   border: 2px solid rgba(255, 255, 255, .2);
   background: transparent;
   backdrop-filter: blur(9px);
+}
+
+.reg_cont{
+  margin-top: 3em;
 }
 
 .form-group {
@@ -115,16 +122,17 @@ label {
 }
 
 #registerButton {
-  background-color: #3498db;
-  color: #fff;
-  padding: 10px 15px;
+  background-color: #B7410E;
+  color: #ffffff;
   border: none;
-  border-radius: 4px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  margin-right: 10px;
   cursor: pointer;
 }
 
 #registerButton:hover {
-  background-color: #217dbb;
+  background-color: #7a2500; /* Darker color on hover */
 }
 
 p {
@@ -133,7 +141,7 @@ p {
 }
 
 #loginLink {
-  color: #007bff;
+  color: black;
   text-decoration: none;
   display: block; /* Make the link a block-level element */
 }
@@ -159,7 +167,7 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #4caf50; /* Green background color */
+  background-color: white; /* Green background color */
   color: white;
   padding: 20px;
   border-radius: 10px;
@@ -175,7 +183,7 @@ p {
 
 .success-popup button {
   background-color: #fff;
-  color: #4caf50;
+  color: #B7410E;
   border: none;
   padding: 10px 20px;
   margin-top: 10px;

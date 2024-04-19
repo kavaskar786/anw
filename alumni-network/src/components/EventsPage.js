@@ -126,6 +126,7 @@ const EventsPage = () => {
   return (
     <div>
       <div className="events-page-container">
+        <div className='evnt_cnt'>
         <h1>Upcoming Events</h1>
         <div className="events-list">
           {eventsData.map((event, index) => (
@@ -146,6 +147,7 @@ const EventsPage = () => {
         <Link to="/events/new" className="add-event-link">
           Add New Event
         </Link>
+        </div>
       </div>
       {selectedEvent && (
         <div className="edit-event-popup">

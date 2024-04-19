@@ -131,7 +131,7 @@
 
 .contact-form button {
   padding: 14px;
-  background-color: #3498db;
+  background-color: #B7410E;
   color: #fff;
   cursor: pointer;
   border: none;
@@ -141,7 +141,7 @@
 }
 
 .contact-form button:hover {
-  background-color: #217dbb;
+  background-color: #7a2500;
 }
 
 .success-message {

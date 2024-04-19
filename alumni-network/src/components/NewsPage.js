@@ -93,8 +93,9 @@ const NewsPage = () => {
     <div>
       <div className="news-page-container">
         <div className="news-content">
-          <h1>News and Updates</h1>
+          
           <div className="news-item">
+          <h1>News and Updates</h1>
             <h2>Add News</h2>
             <input
               type="text"

@@ -18,7 +18,7 @@ const ProfilePage = () => {
     firstName: 'John',
     lastName: null,
     email: 'john.doe@example.com',
-    profilePicture: 'https://static.generated.photos/vue-static/face-generator/landing/demo-previews/sex.jpg',
+    profilePicture: 'https://avatar.iran.liara.run/public/boy?username=Ash',
     bio: 'Passionate about connecting people through technology.',
     workExperience: [],
     education: [],
@@ -87,6 +87,10 @@ const ProfilePage = () => {
   const handleCloseFollowersPopup = () => {
     setShowFollowersPopup(false);
   };
+
+  const handlechatclose = () => {
+    setSelectedUser(null);
+  }
 
   // Handle click on the "Message" button
   const handleMessageClick = (user) => {
@@ -758,20 +762,18 @@ return (
 
 {/* Popup to display following users */}
 {showFollowingPopup && (
-  <div className="popup">
-    <div className="popup-content">
+  <div className="popup1">
+    <div className="popup-content1">
       <span className="close" onClick={handleCloseFollowingPopup}>&times;</span>
       <h2>Following</h2>
-      <ul>
         {following.map(user => (
-          <li key={user.id}>
+          <div key={user.id} className="user-card item">
             <img src={user.profilePicture} alt="Profile" />
             <p>Username: {user.username}</p>
             <p>Name: {user.firstName} {user.lastName}</p>
             <button onClick={() => handleMessageClick(user)}>Message</button>
-          </li>
+          </div>
         ))}
-      </ul>
     </div>
   </div>
 )}
@@ -781,8 +783,8 @@ return (
 
 {/* Popup to display followers */}
 {showFollowersPopup && (
-  <div className="popup">
-    <div className="popup-content">
+  <div className="popup1">
+    <div className="popup-content1">
       <span className="close" onClick={handleCloseFollowersPopup}>&times;</span>
       <h2>Followers</h2>
       <ul>
@@ -801,20 +803,21 @@ return (
 
 {/* Chat interface */}
 {selectedUser && (
-  <div>
+  <div className="popup1">
+    <div className="popup-content1">
+    <span className="close" onClick={handlechatclose}>&times;</span>
     <h2>Chat with {selectedUser.username}</h2>
     {/* Display messages */}
-    <ul>
       {messages.map((message, index) => (
-        <li key={index}>
+        <div key={index}>
           <p>{message.senderId === parseInt(userId) ? 'You' : selectedUser.username}:{message.content}</p>
-        </li>
+        </div>
       ))}
-    </ul>
     {/* Message input */}
     <input type="text" value={messageInput} onChange={(e) => setMessageInput(e.target.value)} />
     {/* Send message button */}
     <button onClick={sendMessage}>Send</button>
+    </div>
   </div>
 )}
       </div>

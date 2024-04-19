@@ -1,175 +1,197 @@
-/* MentorshipProgramPage.css */
-
-/* MentorshipProgramPage.css */
+/* MentorshipPage component styles */
 
 .mentorship-container {
-  max-width: 1000px; /* Increase max-width as needed */
-  margin: 0 auto;
+  background-image: url('../images/Designer\ \(22\).png');
+  background-color: orange;
+  color: white;
   padding: 20px;
-  /*background-image: url('../images/plain-smooth-green-wall-texture.jpg');*/
-  border-radius: 8px;
-  
-
-}
-.mentCont{
-  background-image: url('../images/plain-smooth-green-wall-texture.jpg');
   background-size: cover;
   background-position: center;
-  height: 100vh;
-  
-}
-.ment_cont{
-  margin-top: 3.5em;
-}
-.mentorship-header {
-  font-size: 32px;
-  margin-bottom: 20px;
-  color: #fff; /* Set text color to contrast with the background */
-  text-align: center;
+  min-height: 100vh;
+  height: auto;
 }
 
-/*.search-filter-section {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.search-input {
-  flex: 2;
-  padding: 12px;
-  margin-right: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-}*/
-/*
-.search-filter-section {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-
-}
-
-.search-input {
-  flex: 2; 
-  padding: 12px;
-  margin-right: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-.filter-dropdown {
-  padding: 12px;
-  margin-right: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-.filter-btn {
-  padding: 12px 20px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
+.mentorship-container button{
+  background-color: #B7410E;
+  color: #ffffff;
   border: none;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-  font-size: 16px;
-}
-*/
-.filter-btn:hover {
-  background-color: #0056b3;
+  padding: 8px 15px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
-.mentor-list {
+.mentorship-container button:hover{
+  background-color: #7a2500; /* Darker color on hover */
+}
+
+.req_cont{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
+  justify-content: flex-start;
+  align-items: center;
 
-.mentor-card {
-  width: 250px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  margin: 15px;
-  text-align: center;
-  transition: transform 0.3s ease;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.mentor-card:hover {
-  transform: scale(1.05);
-}
-
-.mentor-avatar {
-  width: 100%;
-  border-radius: 50%;
   margin-bottom: 15px;
 }
 
-.mentor-name {
-  font-size: 18px;
-  margin-bottom: 8px;
-  color: #333;
+.req_cont img{
+  
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
 }
 
-.mentor-title,
-.mentor-industry {
-  margin-bottom: 8px;
-  color: #555;
-}
-
-.connect-btn {
-  padding: 10px 16px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-  font-size: 16px;
-}
-
-.connect-btn:hover {
-  background-color: #0056b3;
-}
-.search-filter-section {
+.req_img{
   display: flex;
-  justify-content: space-between;
-  align-items: stretch; /* Align items to stretch vertically */
+  justify-content: center;
+  align-items: center;
+}
+.req_details{
+  margin-left: 23rem;
+}
+
+.req_buttons{
+  margin-left: 1.27rem;
+}
+.mentorship-content{
+  margin-top: 5em;
+}
+
+.mentorship-content h1{
+  color: black;
+  font-size: 2.5em;
   margin-bottom: 20px;
 }
 
-.search-input {
-  flex: 2; /* Increase the flex value to take up more space */
-  padding: 12px;
-  margin-right: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  height: 100%; /* Set the height to 100% */
+.mentorship-content h3{
+  max-width: fit-content;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value for transparency */
+  border-radius: 10px;
+  position: relative;
+  backdrop-filter: blur(3px);
+  color: black;
+  padding: 20px 20px;
 }
 
-.filter-dropdown {
-  padding: 12px;
-  margin-right: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  height: 100%; /* Set the height to 100% */
+.mentorship-details {
+  margin-top: 20px;
 }
 
-.filter-btn {
-  padding: 12px 20px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
+.mentorship-details h3 {
+  max-width: fit-content;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value for transparency */
+  border-radius: 10px;
+  position: relative;
+  backdrop-filter: blur(3px);
+  color: black;
+}
+
+
+.mentorship-details table {
+  max-width: auto;
+  margin: 20px auto;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value for transparency */
+  border-radius: 10px;
+  position: relative;
+  backdrop-filter: blur(3px);
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px; /* Rounded corners for the table */
+  overflow: hidden; /* Ensure table doesn't extend beyond the rounded corners */
+}
+
+.ment{
+  max-width: auto;
+  margin: 20px auto;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value for transparency */
+  border-radius: 10px;
+  position: relative;
+  backdrop-filter: blur(3px);
+}
+
+.ment p{
+  color:chocolate;
+}
+
+.mentorship-details th, .mentorship-details td {
+  border: 1px solid white;
+  padding: 8px;
+  text-align: center;
+}
+
+.mentorship-details th {
+  background-color: #B7410E; /* Orange */
+  border-radius: 2px;
+}
+
+.mentorship-details td{
+  color: black;
+}
+
+.mentorship-details td:last-child {
+  text-align: center;
+}
+
+.mentorship-form-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mentorship-form-modal h2{
+  color: black;
+}
+
+.mentorship-form-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.mentorship-form-content label {
+  display: block;
+  margin-bottom: 5px;
+  color: black;
+}
+
+.mentorship-form-content input,
+.mentorship-form-content select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.mentorship-form-content button {
+  padding: 10px 20px;
+  background-color: #FFA500; /* Orange */
+  color: white;
   border: none;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-  font-size: 16px;
-  height: 100%; /* Set the height to 100% */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.mentorship-form-content button:hover {
+  background-color: #FF8C00; /* Darker orange on hover */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: black;
 }

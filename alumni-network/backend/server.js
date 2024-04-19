@@ -677,6 +677,275 @@ app.post('/request-mentorship', (req, res) => {
   });
 });
 
+// // Get user details by ID
+// app.get('/user/:id', (req, res) => {
+//   const userId = req.params.id;
+
+//   const query = 'SELECT * FROM users WHERE id = ?';
+
+//   db.query(query, [userId], (error, results) => {
+//     if (error) {
+//       console.error('Error fetching user details:', error);
+//       res.status(500).json({ success: false, message: 'Error fetching user details' });
+//     } else {
+//       if (results.length === 0) {
+//         res.status(404).json({ success: false, message: 'User not found' });
+//       } else {
+//         const user = results[0];
+//         console.log(user);
+//         res.status(200).json({ success: true, user });
+//       }
+//     }
+//   });
+// });
+
+// // Delete mentor request
+// app.delete('/user/:id/mentor/:mentorId', (req, res) => {
+//   const userId = req.params.id;
+//   const mentorId = req.params.mentorId;
+
+//   // Check user's role
+//   const roleQuery = 'SELECT role FROM users WHERE id = ?';
+
+//   db.query(roleQuery, [userId], (error, results) => {
+//     if (error) {
+//       console.error('Error fetching user role:', error);
+//       res.status(500).json({ success: false, message: 'Error fetching user role' });
+//     } else {
+//       const role = results[0].role;
+
+//       // If user is a student, remove mentor from requested_mentors array
+//       if (role === 'student') {
+//         const updateQuery = 'UPDATE users SET requested_mentors = JSON_REMOVE(requested_mentors, JSON_UNQUOTE(JSON_SEARCH(requested_mentors, "one", ?))) WHERE id = ?';
+
+//         db.query(updateQuery, [mentorId, userId], (updateError, updateResults) => {
+//           if (updateError) {
+//             console.error('Error removing mentor from requested_mentors:', updateError);
+//             res.status(500).json({ success: false, message: 'Error removing mentor from requested_mentors' });
+//           } else {
+//             res.status(200).json({ success: true, message: 'Mentor request removed successfully' });
+//           }
+//         });
+//       } else {
+//         res.status(403).json({ success: false, message: 'Only students can remove mentor requests' });
+//       }
+//     }
+//   });
+// });
+
+
+// Route to fetch current user's role
+app.get('/api/currentUser/role', (req, res) => {
+  const userId = req.query.userId; // Assuming userId is passed as query parameter
+  const query = 'SELECT role FROM users WHERE id = ?';
+  db.query(query, [userId], (err, results) => {
+    if (err) {
+      console.error('Error fetching user role:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.status(200).json(results[0]);
+    }
+  });
+});
+
+app.get('/api/mentorship/mentees', (req, res) => {
+  const userId = req.query.userId; 
+  const innerQuery = 'SELECT requested_mentees FROM users WHERE id = ?';
+  
+  db.query(innerQuery, [userId], (err, results) => {
+    if (err) {
+      console.error('Error fetching requested mentees:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      // Check if requested_mentees exists and has length
+      console.log(results[0].requested_mentees.length)
+      if (results[0].requested_mentees.length > 0) {
+        const requestedMentees = results[0].requested_mentees;
+        
+        // Use the extracted values in the outer query
+        const outerQuery = `
+          SELECT * FROM users 
+          WHERE id IN (${requestedMentees.map(id => `'${id}'`).join(',')})`;
+        
+        db.query(outerQuery, (err, mentees) => {
+          if (err) {
+            console.error('Error fetching requested mentees:', err);
+            res.status(500).json({ error: 'Internal server error' });
+          } else {
+            res.status(200).json(mentees);
+          }
+        });
+      } else {
+        // No requested mentees found
+        res.status(200).json([]);
+      }
+    }
+  });
+});
+
+
+
+
+app.get('/api/mentorship/mentors', (req, res) => {
+  const userId = req.query.userId; 
+  const innerQuery = 'SELECT requested_mentors FROM users WHERE id = ?';
+  
+  db.query(innerQuery, [userId], (err, results) => {
+    if (err) {
+      console.error('Error fetching requested mentors:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      // Check if requested_mentors exists and has length
+      console.log(results[0].requested_mentors)
+      if (results[0].requested_mentors.length > 0) {
+        const requestedMentors = results[0].requested_mentors;
+        
+        // Use the extracted values in the outer query
+        const outerQuery = `
+          SELECT * FROM users 
+          WHERE id IN (${requestedMentors.map(id => `'${id}'`).join(',')})`;
+        
+        db.query(outerQuery, (err, mentors) => {
+          if (err) {
+            console.error('Error fetching requested mentors:', err);
+            res.status(500).json({ error: 'Internal server error' });
+          } else {
+            res.status(200).json(mentors);
+          }
+        });
+      } else {
+        // No requested mentors found
+        res.status(200).json([]);
+      }
+    }
+  });
+});
+
+// Route to handle mentorship details submission
+app.post('/api/mentorship/details', (req, res) => {
+  const mentorshipData = req.body;
+
+  // Extract mentor and mentee IDs from mentorshipData
+  const { mentor, mentees, teachingSchedule, subject, hoursPerDay, timings, gmeetLink } = mentorshipData;
+
+  // SQL query to insert mentorship details into mentorship_details table
+  const insertQuery = `
+    INSERT INTO mentorship_details (mentor_id, mentee_id, teaching_schedule, subject, hours_per_day, timings, gmeet_link)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  db.query(insertQuery, [mentor, mentees, teachingSchedule, subject, hoursPerDay, timings, gmeetLink], (err, results) => {
+    if (err) {
+      console.error('Error inserting mentorship details:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      // Update requested_mentees and requested_mentors columns in users table
+      const updateMentorQuery = `UPDATE users SET requested_mentees = JSON_REMOVE(requested_mentees, JSON_UNQUOTE(JSON_SEARCH(requested_mentees, 'one', ?))) WHERE id = ?`;
+      const updateMenteeQuery = `UPDATE users SET requested_mentors = JSON_REMOVE(requested_mentors, JSON_UNQUOTE(JSON_SEARCH(requested_mentors, 'one', ?))) WHERE id = ?`;
+
+      db.query(updateMentorQuery, [mentees, mentor], (err, mentorResult) => {
+        if (err) {
+          console.error('Error updating requested mentees:', err);
+          res.status(500).json({ error: 'Internal server error' });
+        } else {
+          db.query(updateMenteeQuery, [mentor, mentees], (err, menteeResult) => {
+            if (err) {
+              console.error('Error updating requested mentors:', err);
+              res.status(500).json({ error: 'Internal server error' });
+            } else {
+              res.status(200).json({ message: 'Mentorship details submitted successfully' });
+            }
+          });
+        }
+      });
+    }
+  });
+});
+
+// Route to fetch mentorship details for current user
+app.get('/api/mentorship/detailss', (req, res) => {
+  const userId = req.query.userId;
+  const roleQuery = 'SELECT role FROM users WHERE id = ?';
+  
+  db.query(roleQuery, [userId], (err, roleResult) => {
+    if (err) {
+      console.error('Error fetching user role:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      const role = roleResult[0].role;
+      let fetchQuery, column;
+      if (role === 'staff' || role === 'alumni') {
+        column = 'mentor_id';
+      } else {
+        column = 'mentee_id';
+      }
+      fetchQuery = `
+        SELECT * FROM mentorship_details 
+        WHERE ${column} = ?`;
+      
+      db.query(fetchQuery, [userId], (err, details) => {
+        if (err) {
+          console.error('Error fetching mentorship details:', err);
+          res.status(500).json({ error: 'Internal server error' });
+        } else {
+          res.status(200).json(details);
+        }
+      });
+    }
+  });
+});
+
+// Route to handle removal of requested mentees or mentors
+app.post('/api/mentorship/remove', (req, res) => {
+  const { userId, removedUserId, role } = req.body;
+
+  let updateColumn, removedColumn;
+  if (role === 'staff' || role === 'alumni') {
+    updateColumn = 'requested_mentees';
+    removedColumn = 'requested_mentors';
+  } else {
+    updateColumn = 'requested_mentors';
+    removedColumn = 'requested_mentees';
+  }
+
+  // Remove removedUserId from the current user's requested mentees/mentors
+  const updateQuery = `UPDATE users SET ${updateColumn} = JSON_REMOVE(${updateColumn}, JSON_UNQUOTE(JSON_SEARCH(${updateColumn}, 'one', ?))) WHERE id = ?`;
+  db.query(updateQuery, [removedUserId, userId], (err, result) => {
+    if (err) {
+      console.error('Error removing requested mentees/mentors:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      // Remove userId from the removed user's requested mentors/mentees
+      const removeQuery = `UPDATE users SET ${removedColumn} = JSON_REMOVE(${removedColumn}, JSON_UNQUOTE(JSON_SEARCH(${removedColumn}, 'one', ?))) WHERE id = ?`;
+      db.query(removeQuery, [userId, removedUserId], (err, result) => {
+        if (err) {
+          console.error('Error removing requested mentors/mentees:', err);
+          res.status(500).json({ error: 'Internal server error' });
+        } else {
+          res.status(200).json({ message: 'Requested mentees/mentors removed successfully' });
+        }
+      });
+    }
+  });
+});
+
+// Handle DELETE request to finish a mentorship
+app.delete('/api/mentorship/details/finish', (req, res) => {
+  const id = req.query.id;
+  const query = 'DELETE FROM mentorship_details WHERE id = ?';
+  db.query(query, [id], (err, results) => {
+    if (err) {
+      console.error('Error finishing mentorship:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.status(200).json({ message: 'Mentorship finished successfully' });
+    }
+  });
+});
+
+
+
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

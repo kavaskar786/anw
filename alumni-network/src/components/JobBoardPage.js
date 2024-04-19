@@ -93,9 +93,10 @@ function JobBoardPage() {
   };
 
   return (
-    <div>
-      <section id="job-listings" className='p-5 job'>
+    <div >
+      <section id="job-listings" className='p-5 job' >
         <div className='container'>
+          <h1>JobBoardPage</h1>
           <form onSubmit={handleSubmit}>
             <input type="text" id="job" name="title" placeholder="Title" value={formData.title} onChange={handleInputChange} required />
             <input type="text"id="job" name="company" placeholder="Company" value={formData.company} onChange={handleInputChange} required />
